@@ -1,7 +1,7 @@
 import React from "react";
 import Topbar from "../common/Topbar/Topbar";
 
-function HomeComponent() {
+function SignupComponent() {
   return (
     <div>
       <Topbar />
@@ -9,4 +9,4 @@ function HomeComponent() {
   );
 }
 
-export default HomeComponent;
+export default SignupComponent;
