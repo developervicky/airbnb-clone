@@ -2,19 +2,25 @@ import React, { useState } from "react";
 import SignupComponent from "../components/SignupComponent";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Toastify } from "../common/toastify/Toastify.jsx";
 
 function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPwd] = useState("");
-  const registerUser = (e) => {
-    e.preventDefault();
-    axios.post("/register", {
-      name,
-      email,
-      password,
-    });
 
+  const registerUser = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/register", {
+        name,
+        email,
+        password,
+      });
+      Toastify("success", "Account Created!");
+    } catch (e) {
+      Toastify("fail", "Cannot Create an Account!");
+    }
   };
   return (
     <div className="flex flex-col grow justify-center items-center gap-5 mb-36">
