@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 function Topbar() {
   return (
     <div>
-      {" "}
       <div>
         <div>
           <header className="py-6 flex justify-around">

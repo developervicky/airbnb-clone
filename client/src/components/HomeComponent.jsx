@@ -4,7 +4,7 @@ import Topbar from "../common/Topbar/Topbar";
 function HomeComponent() {
   return (
     <div>
-      <Topbar />
+      Home Component
     </div>
   );
 }
