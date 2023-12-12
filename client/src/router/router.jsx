@@ -8,6 +8,9 @@ import Homepage from "../pages/Homepage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import Layout from "../Layout/Layout";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:5000";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
