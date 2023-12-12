@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginComponent from "../components/LoginComponent";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
+import { Toastify } from "../common/toastify/Toastify.jsx";
 
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPwd] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const signinUser = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/signin", {
+        email,
+        password,
+      });
+      Toastify("success", "Successful Login!");
+      setRedirect(true);
+    } catch (e) {
+      Toastify("fail", "Wrong Credentials!");
+    }
+  };
+  if (redirect) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <div className="flex flex-col grow justify-center items-center gap-5 mb-36">
       <div className=" text-3xl font-bold">
@@ -11,9 +32,23 @@ function LoginPage() {
       <div className="text-3xl font-bold underline underline-offset-4 decoration-primary ">
         Login
       </div>
-      <form className="flex flex-col items-center">
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+      <form className="flex flex-col items-center " onSubmit={signinUser}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => {
+            setPwd(e.target.value);
+          }}
+        />
         <button className="border-2  w-96 mt-3 px-4 py-3 font-semibold tracking-widest rounded-full hover:border-primary hover:bg-primary hover:text-white">
           Login
         </button>
