@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../components/UserContext";
 function Topbar() {
+  const { user } = useContext(UserContext);
   return (
     <div>
       <div>
@@ -51,8 +53,8 @@ function Topbar() {
               </button>
             </div>
             <Link
-              to={"/signin"}
-              className="flex border-2 border-gray-200 rounded-full py-2 pr-2 pl-5 gap-3 items-center shadow-md shadow-gray-200"
+              to={user ? "/account" : "/signin"}
+              className="flex border-2 border-gray-200 rounded-full py-2 pr-4 pl-5 gap-2 font-medium items-center shadow-md shadow-gray-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,6 +82,7 @@ function Topbar() {
                   clipRule="evenodd"
                 />
               </svg>
+              {!!user && <div>{user.name}</div>}
             </Link>
           </header>
           <div className="border-t pb-6"></div>

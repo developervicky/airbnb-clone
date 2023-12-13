@@ -5,12 +5,14 @@ const User = require("./model/User.js");
 const app = express();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "gfvdasuyhjfgbfciulhasdejkfbcvs";
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
@@ -54,7 +56,7 @@ app.post("/signin", async (req, res) => {
           {},
           (err, token) => {
             if (err) throw err;
-            res.cookie("token", token).json("Password right!");
+            res.cookie("token", token).json(userData);
           }
         );
       } else {
@@ -66,6 +68,20 @@ app.post("/signin", async (req, res) => {
   } catch (e) {
     res.status(422).json(e);
   }
+});
+
+app.get("/profile", (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      const { _id, email, name } = await User.findById(userData.id);
+      res.json({ _id, email, name });
+    });
+  } else {
+    res.json(null);
+  }
+  // res.json({ token });
 });
 
 app.listen(5000);

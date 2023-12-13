@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Route,
+  Routes,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
@@ -11,6 +12,7 @@ import Layout from "../Layout/Layout";
 import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter(
   createRoutesFromElements(

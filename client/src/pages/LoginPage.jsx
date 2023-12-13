@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import LoginComponent from "../components/LoginComponent";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Toastify } from "../common/toastify/Toastify.jsx";
+import { UserContext } from "../components/UserContext.jsx";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPwd] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const { setUser } = useContext(UserContext);
   const signinUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/signin", {
+      const { data } = await axios.post("/signin", {
         email,
         password,
       });
+      setUser(data);
       Toastify("success", "Successful Login!");
       setRedirect(true);
     } catch (e) {
