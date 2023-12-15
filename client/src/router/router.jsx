@@ -13,7 +13,6 @@ import axios from "axios";
 import AccountPage from "../pages/AccountPage";
 import BookingPage from "../pages/BookingPage";
 import AccommodationPage from "../pages/AccommodationPage";
-import AccountLayout from "../Layout/AccountLayout";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -24,11 +23,7 @@ const router = createBrowserRouter(
       <Route path="home" element={<Homepage />} />
       <Route path="signin" element={<LoginPage />} />
       <Route path="signup" element={<SignupPage />} />
-      <Route path="/account" element={<AccountLayout />}>
-        <Route index element={<AccountPage />} />
-        <Route path="bookings" element={<BookingPage />} />
-        <Route path="accommodations" element={<AccommodationPage />} />
-      </Route>
+      <Route path="/account/:subpage?" element={<AccountPage />} />
     </Route>
   )
 );

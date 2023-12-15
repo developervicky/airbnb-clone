@@ -84,4 +84,7 @@ app.get("/profile", (req, res) => {
   // res.json({ token });
 });
 
+app.post("/logout", (req, res) => {
+  res.cookie("token", "").json("Succesful Logout");
+});
 app.listen(5000);

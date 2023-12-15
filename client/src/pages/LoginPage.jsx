@@ -57,12 +57,11 @@ function LoginPage() {
         </button>
       </form>
       <div>
-        Don't have a account?{" "}
+        Don't have a account?
         <Link
           to="/signup"
           className="tracking-wider underline underline-offset-4 decoration-primary hover:font-semibold hover:text-primary"
         >
-          {" "}
           Signup
         </Link>
       </div>
