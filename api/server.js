@@ -35,8 +35,15 @@ app.post("/register", async (req, res) => {
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
     });
-    res.json({ userData });
-    console.log({ userData });
+    jwt.sign(
+      { email: userData.email, id: userData._id, name: userData.name },
+      jwtSecret,
+      {},
+      (err, token) => {
+        if (err) throw err;
+        res.cookie("token", token).json(userData);
+      }
+    );
   } catch (e) {
     res.status(422).json(e);
   }

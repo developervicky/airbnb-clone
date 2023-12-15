@@ -1,27 +1,40 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SignupComponent from "../components/SignupComponent";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Toastify } from "../common/toastify/Toastify.jsx";
+import { UserContext } from "../components/UserContext.jsx";
 
 function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPwd] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  const { setUser } = useContext(UserContext);
 
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/register", {
-        name,
-        email,
-        password,
-      });
+      await axios
+        .post("/register", {
+          name,
+          email,
+          password,
+        })
+        .then(({ data }) => {
+          setUser(data);
+        });
+      setRedirect(true);
       Toastify("success", "Account Created!");
     } catch (e) {
       Toastify("fail", "Cannot Create an Account!");
     }
   };
+  if (redirect) {
+    return <Navigate to={"/"} />;
+  }
+
   return (
     <div className="flex flex-col grow justify-center items-center gap-5 mb-36">
       <div className=" text-3xl font-bold">

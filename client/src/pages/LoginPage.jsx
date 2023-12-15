@@ -10,6 +10,7 @@ function LoginPage() {
   const [password, setPwd] = useState("");
   const [redirect, setRedirect] = useState(false);
   const { setUser } = useContext(UserContext);
+
   const signinUser = async (e) => {
     e.preventDefault();
     try {
@@ -27,6 +28,7 @@ function LoginPage() {
   if (redirect) {
     return <Navigate to={"/"} />;
   }
+  
   return (
     <div className="flex flex-col grow justify-center items-center gap-5 mb-36">
       <div className=" text-3xl font-bold">

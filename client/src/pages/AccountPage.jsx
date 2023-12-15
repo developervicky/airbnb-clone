@@ -45,9 +45,17 @@ function AccountPage() {
           className={topbarStyle("accommodations")}
           to={"/account/accommodations"}
         >
-          Your Accommodations
+          Your Own Accommodations
         </Link>
       </nav>
+      {subpage === "account" && (
+        <div className="flex flex-col ml-64 py-12 gap-4 items-start">
+          <div className="font-extrabold text-4xl tracking-wider">Account</div>
+          <div className="text-xl tracking-wider">
+            <span className="font-semibold">{user.name}</span>, <span>{user.email}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

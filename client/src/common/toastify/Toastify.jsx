@@ -5,7 +5,7 @@ export const Toastify = (mode, msg) => {
   if (mode === "success") {
     toast.success(`${msg}`, {
       position: "bottom-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: true,
@@ -16,7 +16,7 @@ export const Toastify = (mode, msg) => {
   } else if (mode === "fail") {
     toast.error(`${msg}`, {
       position: "bottom-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: true,
