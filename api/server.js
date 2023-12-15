@@ -28,15 +28,21 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { fname, lname, email, password } = req.body;
   try {
     const userData = await User.create({
-      name,
+      fname,
+      lname,
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
     });
     jwt.sign(
-      { email: userData.email, id: userData._id, name: userData.name },
+      {
+        email: userData.email,
+        id: userData._id,
+        fname: userData.fname,
+        lname: userData.lname,
+      },
       jwtSecret,
       {},
       (err, token) => {
@@ -82,8 +88,8 @@ app.get("/profile", (req, res) => {
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      const { _id, email, name } = await User.findById(userData.id);
-      res.json({ _id, email, name });
+      const { _id, email, fname, lname } = await User.findById(userData.id);
+      res.json({ _id, email, fname, lname });
     });
   } else {
     res.json(null);

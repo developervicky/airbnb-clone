@@ -97,7 +97,7 @@ function Topbar() {
             </svg>
             {user ? (
               <div className="font-semibold text-gray-500 tracking-wider ">
-                {user.name}
+                {user.fname}
               </div>
             ) : (
               <div className="font-semibold text-gray-500 tracking-wider ">

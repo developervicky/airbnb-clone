@@ -28,11 +28,15 @@ function LoginPage() {
   if (redirect) {
     return <Navigate to={"/"} />;
   }
-  
+
   return (
     <div className="flex flex-col grow justify-center items-center gap-5 mb-36">
       <div className=" text-3xl font-bold">
-        Welcome to <span className="text-primary">airbnb!</span>
+        Welcome to
+        <span className="text-3xl font-medium text-primary tracking-wider">
+          {" "}
+          trip<span className="font-bold">R</span>over
+        </span>
       </div>
       <div className="text-3xl font-bold underline underline-offset-4 decoration-primary ">
         Login

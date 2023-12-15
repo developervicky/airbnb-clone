@@ -6,7 +6,8 @@ import { Toastify } from "../common/toastify/Toastify.jsx";
 import { UserContext } from "../components/UserContext.jsx";
 
 function SignupPage() {
-  const [name, setName] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPwd] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -18,7 +19,8 @@ function SignupPage() {
     try {
       await axios
         .post("/register", {
-          name,
+          fname,
+          lname,
           email,
           password,
         })
@@ -38,7 +40,11 @@ function SignupPage() {
   return (
     <div className="flex flex-col grow justify-center items-center gap-5 mb-36">
       <div className=" text-3xl font-bold">
-        Welcome to <span className="text-primary">airbnb!</span>
+        Welcome to
+        <span className="text-3xl font-medium text-primary tracking-wider">
+          {" "}
+          trip<span className="font-bold">R</span>over
+        </span>
       </div>
       <div className="text-3xl font-bold underline underline-offset-4 decoration-primary ">
         Signup
@@ -46,9 +52,15 @@ function SignupPage() {
       <form className="flex flex-col" onSubmit={registerUser}>
         <input
           type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder="First Name"
+          value={fname}
+          onChange={(e) => setFname(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lname}
+          onChange={(e) => setLname(e.target.value)}
         />
         <input
           type="email"
