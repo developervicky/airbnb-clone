@@ -6,6 +6,9 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
+const Token = require("./model/Token.js");
+const sendEmail = require("./utils/sendEmail.js");
+const crypto = require("crypto");
 require("dotenv").config();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
@@ -36,6 +39,7 @@ app.post("/register", async (req, res) => {
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
     });
+
     jwt.sign(
       {
         email: userData.email,
@@ -47,11 +51,55 @@ app.post("/register", async (req, res) => {
       {},
       (err, token) => {
         if (err) throw err;
-        res.cookie("token", token).json(userData);
+        res.json(userData);
       }
     );
+    const verifToken = await new Token({
+      userId: userData._id,
+      token: crypto.randomBytes(32).toString("hex"),
+    }).save();
+    const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
+    console.log(userData.email, url);
+    await sendEmail(userData.email, "Verify Email", url);
+    return res.send({ message: "Verify the Email" });
   } catch (e) {
-    res.status(422).json(e);
+    res.status(422);
+  }
+});
+
+app.get("/:id/verify/:token", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    // res.send(user);
+    if (!user) {
+      return res.status(400).send({ message: "User not Existing" });
+    }
+    // Token.findOneAndDelete(
+    //   {
+    //     userId: user._id,
+    //     token: req.params.token,
+    //   },
+    //   (err, doc) => {
+    //     if (err) {
+    //       res.json({ err });
+    //     }
+
+    //     res.json({ doc });
+    //   }
+    // );
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
+    });
+    if (!token) {
+      return res.status(400).send({ message: "Link was Expired/Wrong" });
+    }
+
+    await User.updateOne({ _id: user._id, verfied: true });
+    res.status(200).send({ message: "Email verified successfully" });
+    // token.remove();
+  } catch (error) {
+    res.send(error);
   }
 });
 
@@ -63,20 +111,39 @@ app.post("/signin", async (req, res) => {
       // res.json("Email already exist");
       const passOk = bcrypt.compareSync(password, userData.password);
       if (passOk) {
-        jwt.sign(
-          { email: userData.email, id: userData._id },
-          jwtSecret,
-          {},
-          (err, token) => {
-            if (err) throw err;
-            res.cookie("token", token).json(userData);
+        if (userData.verfied) {
+          jwt.sign(
+            { email: userData.email, id: userData._id },
+            jwtSecret,
+            {},
+            (err, token) => {
+              if (err) throw err;
+              res.cookie("token", token).json(userData);
+            }
+          );
+        } else if (!userData.verfied) {
+          const token = await Token.findOne({
+            userId: userData._id,
+          });
+          if (token) {
+            res
+              .status(202)
+              .send({ message: "Check Your Email and Vaildate the Account" });
+          } else if (!token) {
+            const verifToken = await new Token({
+              userId: userData._id,
+              token: crypto.randomBytes(32).toString("hex"),
+            }).save();
+            const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
+            await sendEmail(userData.email, "Verify Email", url);
+            res.status(202).send({ message: "Email sent again" });
           }
-        );
+        }
       } else {
-        res.status(422).json("Password wrong!");
+        res.status(202).send({ message: "Password wrong!" });
       }
     } else {
-      res.json("Email doesn't exist");
+      res.status(202).send({ message: "Email doesn't exist" });
     }
   } catch (e) {
     res.status(422).json(e);
@@ -100,4 +167,5 @@ app.get("/profile", (req, res) => {
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("Succesful Logout");
 });
+
 app.listen(5000);

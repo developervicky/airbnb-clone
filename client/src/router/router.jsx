@@ -13,6 +13,7 @@ import axios from "axios";
 import AccountPage from "../pages/AccountPage";
 import BookingPage from "../pages/BookingPage";
 import AccommodationPage from "../pages/AccommodationPage";
+import EmailVerify from "../common/EmailVerify/EmailVerify";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="signin" element={<LoginPage />} />
       <Route path="signup" element={<SignupPage />} />
       <Route path="/account/:subpage?" element={<AccountPage />} />
+      <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
     </Route>
   )
 );

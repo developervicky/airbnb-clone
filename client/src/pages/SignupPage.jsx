@@ -12,23 +12,26 @@ function SignupPage() {
   const [password, setPwd] = useState("");
   const [redirect, setRedirect] = useState(false);
 
-  const { setUser } = useContext(UserContext);
+  const { setUser, user } = useContext(UserContext);
+
+  // if (user) {
+  //   return <Navigate to={"/"} />;
+  // }
 
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      await axios
-        .post("/register", {
-          fname,
-          lname,
-          email,
-          password,
-        })
-        .then(({ data }) => {
-          setUser(data);
-        });
-      setRedirect(true);
-      Toastify("success", "Account Created!");
+      await axios.post("/register", {
+        fname,
+        lname,
+        email,
+        password,
+      });
+      // .then(({ data }) => {
+      //   setUser(data);
+      // });
+      // setRedirect(true);
+      Toastify("success", "Verification Email Sent!");
     } catch (e) {
       Toastify("fail", "Cannot Create an Account!");
     }

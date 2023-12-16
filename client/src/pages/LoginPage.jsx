@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import LoginComponent from "../components/LoginComponent";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, resolvePath } from "react-router-dom";
 import axios from "axios";
 import { Toastify } from "../common/toastify/Toastify.jsx";
 import { UserContext } from "../components/UserContext.jsx";
@@ -14,15 +14,24 @@ function LoginPage() {
   const signinUser = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/signin", {
-        email,
-        password,
-      });
-      setUser(data);
-      Toastify("success", "Successful Login!");
-      setRedirect(true);
+      const data = await axios
+        .post("/signin", {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.status == 202) {
+            console.log(res.status);
+            Toastify("fail", `${res.data.message}`);
+          } else {
+            console.log(res.data);
+            setUser(res.data);
+            Toastify("success", "Successful Login!");
+            setRedirect(true);
+          }
+        });
     } catch (e) {
-      Toastify("fail", "Wrong Credentials!");
+      return e;
     }
   };
   if (redirect) {
@@ -63,7 +72,7 @@ function LoginPage() {
         </button>
       </form>
       <div>
-        Don't have a account?
+        Don't have a account?{" "}
         <Link
           to="/signup"
           className="tracking-wider underline underline-offset-4 decoration-primary hover:font-semibold hover:text-primary"

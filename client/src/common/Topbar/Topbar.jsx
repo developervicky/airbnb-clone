@@ -20,7 +20,7 @@ function Topbar() {
 
   return (
     <div>
-      <header className="py-6 flex justify-around">
+      <header className="py-6 flex justify-around gap-4">
         <a href="/" className="flex items-center gap-2">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ function Topbar() {
         <div className="flex flex-row gap-5 ">
           <Link
             to={user ? "/account" : "/signin"}
-            className="flex border-2 border-gray-200 rounded-full py-2 px-4 gap-2 font-medium items-center shadow-md shadow-gray-200  hover:border-primary"
+            className="flex border-2 border-gray-200 rounded-full py-2 px-4  gap-2 font-medium items-center shadow-md shadow-gray-200  hover:border-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
