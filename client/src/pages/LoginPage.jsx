@@ -7,8 +7,9 @@ import { UserContext } from "../components/UserContext.jsx";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
-  const [password, serPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
   const { user, setUser } = useContext(UserContext);
   if (user) {
     return <Navigate to={"/"} />;
@@ -52,26 +53,54 @@ function LoginPage() {
       <div className="text-3xl font-bold underline underline-offset-4 decoration-primary ">
         Login
       </div>
-      <form className="flex flex-col items-center gap-4 " onSubmit={signinUser}>
-        <div className="border-2 rounded-full ">
+      <form className="flex flex-col gap-4" onSubmit={signinUser}>
+        <div className="border-2  rounded-full :border-primary">
           <input
             type="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="border-2 rounded-full ">
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => {
-              serPassword(e.target.value);
-            }}
-          />
+        <div className="input-container">
+          <div className="flex flex-row items-center border-2 rounded-full ps-0 pe-2 py-0">
+            <input
+              value={password}
+              onChange={({ target }) => {
+                setPassword(target.value);
+              }}
+              type={hidePassword ? "password" : "text"}
+              placeholder="Password"
+            />
+
+            <a
+              href="#"
+              onClick={() => {
+                setHidePassword(!hidePassword);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+                style={{ color: !hidePassword ? "#17A191" : "#c3c3c3" }}
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
         <div className="flex justify-center items-stretch border-2 rounded-full hover:border-primary hover:bg-primary hover:text-white">
           <button className="border-none w-96 py-3 font-semibold tracking-widest">
@@ -85,10 +114,10 @@ function LoginPage() {
           to="/signup"
           className="tracking-wider underline underline-offset-4 decoration-primary hover:font-semibold hover:text-primary"
         >
+          {" "}
           Signup
         </Link>
       </div>
-      {/* <LoginComponent /> */}
     </div>
   );
 }
