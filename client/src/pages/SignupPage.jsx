@@ -21,12 +21,14 @@ function SignupPage() {
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/register", {
+      const { data } = await axios.post("/register", {
         fname,
         lname,
         email,
         password,
       });
+
+      console.log(data);
       // .then(({ data }) => {
       //   setUser(data);
       // });

@@ -1,6 +1,6 @@
 const nodeMailer = require("nodemailer");
 
-module.exports = async (email, subject, text) => {
+module.exports = async (email, subject, url, name) => {
   try {
     const transporter = nodeMailer.createTransport({
       host: process.env.HOST,
@@ -19,7 +19,14 @@ module.exports = async (email, subject, text) => {
       from: process.env.USER,
       to: email,
       subject: subject,
-      text: text,
+      html: `<h1>Hello ${name},</h1>
+      <h2>Welcome to tripRover</h2>
+      <p>Glad to welcome, One step was left to access our facilities.</p>
+      <p>Click the below link to activate your account:</p>
+      <p>${url}</p>
+      <p>If the link was expired then try login again, it would send you another activation link.</p>
+      <h2>Thank you,</h2>
+      <h3>tripRover</h3>`,
     });
   } catch (err) {
     console.log(err);

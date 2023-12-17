@@ -32,13 +32,19 @@ app.get("/test", (req, res) => {
 
 app.post("/register", async (req, res) => {
   const { fname, lname, email, password } = req.body;
+
   try {
+    let user = await User.findOne({ email });
+    if (user) return res.status(400).send("User already registered.");
+
     const userData = await User.create({
       fname,
       lname,
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
     });
+
+    const fullname = userData.fname + " " + userData.lname;
 
     jwt.sign(
       {
@@ -60,7 +66,7 @@ app.post("/register", async (req, res) => {
     }).save();
     const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
     console.log(userData.email, url);
-    await sendEmail(userData.email, "Verify Email", url);
+    await sendEmail(userData.email, "Verify Email - tripRover", url, fullname);
     return res.send({ message: "Verify the Email" });
   } catch (e) {
     res.status(422);
@@ -95,7 +101,7 @@ app.get("/:id/verify/:token", async (req, res) => {
       return res.status(400).send({ message: "Link was Expired/Wrong" });
     }
 
-    await User.updateOne({ _id: user._id, verfied: true });
+    await User.updateOne({ _id: user._id }, { verified: true });
     res.status(200).send({ message: "Email verified successfully" });
     // token.remove();
   } catch (error) {
@@ -111,7 +117,7 @@ app.post("/signin", async (req, res) => {
       // res.json("Email already exist");
       const passOk = bcrypt.compareSync(password, userData.password);
       if (passOk) {
-        if (userData.verfied) {
+        if (userData.verified) {
           jwt.sign(
             { email: userData.email, id: userData._id },
             jwtSecret,
@@ -121,7 +127,7 @@ app.post("/signin", async (req, res) => {
               res.cookie("token", token).json(userData);
             }
           );
-        } else if (!userData.verfied) {
+        } else if (!userData.verified) {
           const token = await Token.findOne({
             userId: userData._id,
           });
