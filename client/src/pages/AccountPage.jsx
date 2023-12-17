@@ -57,6 +57,11 @@ function AccountPage() {
             </span>
             , <span>{user.email}</span>
           </div>
+          {user.verified ? (
+            <div className="text-xl tracking-wider">Verified Account!</div>
+          ) : (
+            <div>Still Account was not verified, Check your email</div>
+          )}
         </div>
       )}
     </div>

@@ -7,10 +7,12 @@ import { UserContext } from "../components/UserContext.jsx";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
-  const [password, setPwd] = useState("");
+  const [password, serPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const { setUser } = useContext(UserContext);
-
+  const { user, setUser } = useContext(UserContext);
+  if (user) {
+    return <Navigate to={"/"} />;
+  }
   const signinUser = async (e) => {
     e.preventDefault();
     try {
@@ -50,26 +52,32 @@ function LoginPage() {
       <div className="text-3xl font-bold underline underline-offset-4 decoration-primary ">
         Login
       </div>
-      <form className="flex flex-col items-center " onSubmit={signinUser}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPwd(e.target.value);
-          }}
-        />
-        <button className="border-2  w-96 mt-3 px-4 py-3 font-semibold tracking-widest rounded-full hover:border-primary hover:bg-primary hover:text-white">
-          Login
-        </button>
+      <form className="flex flex-col items-center gap-4 " onSubmit={signinUser}>
+        <div className="border-2 rounded-full ">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+        </div>
+        <div className="border-2 rounded-full ">
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              serPassword(e.target.value);
+            }}
+          />
+        </div>
+        <div className="flex justify-center items-stretch border-2 rounded-full hover:border-primary hover:bg-primary hover:text-white">
+          <button className="border-none w-96 py-3 font-semibold tracking-widest">
+            Login
+          </button>
+        </div>
       </form>
       <div>
         Don't have a account?{" "}

@@ -34,6 +34,8 @@ app.post("/register", async (req, res) => {
   const { fname, lname, email, password } = req.body;
 
   try {
+    if (!fname || !lname || !email)
+      return res.status(400).send("Fill the form");
     let user = await User.findOne({ email });
     if (user) return res.status(400).send("User already registered.");
 
@@ -161,8 +163,10 @@ app.get("/profile", (req, res) => {
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      const { _id, email, fname, lname } = await User.findById(userData.id);
-      res.json({ _id, email, fname, lname });
+      const { _id, email, fname, lname, verified } = await User.findById(
+        userData.id
+      );
+      res.json({ _id, email, fname, lname, verified });
     });
   } else {
     res.json(null);
