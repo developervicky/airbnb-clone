@@ -12,7 +12,7 @@ const TokenSchema = new Schema({
     type: String,
     required: true,
   },
-  createdAt: { type: Date, default: Date.now(), expires: null }, //1hr
+  createdAt: { type: Date, default: Date.now(), expires: 3600 }, //1hr
 });
 
 const TokenModel = mongoose.model("Token", TokenSchema);

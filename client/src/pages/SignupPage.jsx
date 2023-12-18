@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import SignupComponent from "../components/SignupComponent";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Toastify } from "../common/toastify/Toastify.jsx";
@@ -20,7 +19,6 @@ function SignupPage() {
   if (user) {
     return <Navigate to={"/"} />;
   }
-
 
   const handlePassword = (passwordValue) => {
     const strengthChecks = {
@@ -96,30 +94,30 @@ function SignupPage() {
         Signup
       </div>
       <form className="flex flex-col gap-4" onSubmit={registerUser}>
-        <div className="border-2 rounded-full ">
-          <input
-            type="text"
-            placeholder="First Name"
-            value={fname}
-            onChange={(e) => setFname(e.target.value)}
-          />
-        </div>
-        <div className="border-2 rounded-full">
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lname}
-            onChange={(e) => setLname(e.target.value)}
-          />
-        </div>
-        <div className="border-2  rounded-full :border-primary">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="First Name"
+          className=" border-2 focus:outline-none w-full font-medium tracking-wider rounded-full px-4 py-3"
+          value={fname}
+          onChange={(e) => setFname(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Last Name"
+          className=" border-2 focus:outline-none font-medium tracking-wider w-full rounded-full px-4 py-3"
+          value={lname}
+          onChange={(e) => setLname(e.target.value)}
+        />
+
+        <input
+          type="email"
+          placeholder="Email"
+          className=" border-2 focus:outline-none font-medium tracking-wider w-full rounded-full px-4 py-3"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
         <div className="input-container">
           <div className="flex flex-row items-center border-2 rounded-full ps-0 pe-2 py-0">
             <input
@@ -127,6 +125,7 @@ function SignupPage() {
               onChange={({ target }) => {
                 handlePassword(target.value);
               }}
+              className=" w-full font-medium rounded-full font-medium tracking-wider px-4 py-3 focus:outline-none"
               type={hidePassword ? "password" : "text"}
               placeholder="Password"
             />

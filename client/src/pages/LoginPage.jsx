@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import LoginComponent from "../components/LoginComponent";
 import { Link, Navigate, resolvePath } from "react-router-dom";
 import axios from "axios";
 import { Toastify } from "../common/toastify/Toastify.jsx";
@@ -54,11 +53,12 @@ function LoginPage() {
         Login
       </div>
       <form className="flex flex-col gap-4" onSubmit={signinUser}>
-        <div className="border-2  rounded-full :border-primary">
+        <div className="">
           <input
             type="email"
             placeholder="Email"
             value={email}
+            className="border-2 w-full font-medium tracking-wider font-medium rounded-full px-4 py-3 focus:outline-none "
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -70,6 +70,7 @@ function LoginPage() {
                 setPassword(target.value);
               }}
               type={hidePassword ? "password" : "text"}
+              className=" w-full font-medium font-medium tracking-wider rounded-full px-4 py-3 focus:outline-none"
               placeholder="Password"
             />
 

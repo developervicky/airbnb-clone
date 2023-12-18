@@ -55,11 +55,11 @@ function Topbar() {
             trip<span className="font-bold">R</span>over
           </span>
         </a>
-        <div className="flex flex-row items-center gap-2 border-2 border-gray-200 rounded-full py-0 pr-3 pl-2 shadow-md shadow-gray-200">
+        <div className="flex flex-row justify-between items-center w-96 gap-2 border-2 border-gray-200 rounded-full py-0 pr-3 pl-2 shadow-md shadow-gray-200">
           <input
             type="text"
             placeholder="where the next adventure, fella!"
-            className="border-none"
+            className="border-none w-full h-full rounded-full px-4 py-3 font-medium tracking-wider focus:outline-none"
           />
           <button className="bg-primary text-white rounded-full px-3 h-10">
             <svg
