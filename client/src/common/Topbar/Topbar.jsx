@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../../components/UserContext";
 import { LuLogOut } from "react-icons/lu";
@@ -19,7 +19,7 @@ function Topbar() {
   }
 
   return (
-    <div>
+    <div className="sticky top-0 bg-white">
       <header className="py-6 flex justify-around gap-4">
         <a href="/" className="flex items-center gap-2">
           {/* <svg
