@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const Token = require("./model/Token.js");
 const sendEmail = require("./utils/sendEmail.js");
 const crypto = require("crypto");
+const download = require("image-downloader");
 require("dotenv").config();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
@@ -16,6 +17,7 @@ const jwtSecret = "gfvdasuyhjfgbfciulhasdejkfbcvs";
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
     credentials: true,
@@ -176,6 +178,19 @@ app.get("/profile", (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("Succesful Logout");
+});
+
+console.log(__dirname);
+app.post("/uploads", async (req, res) => {
+  const { photoLink: link } = req.body;
+  const newName = "photo" + Date.now() + ".jpg";
+  await download.image({
+    url: `${link}`,
+    dest: __dirname + "/uploads/" + newName,
+  });
+  res.send(newName);
+  // res.send(link);
+  // res.send(dest);
 });
 
 app.listen(5000);
