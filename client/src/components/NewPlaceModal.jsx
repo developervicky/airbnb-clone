@@ -18,7 +18,7 @@ export default function NewPlaceModal() {
   const [description, setDescription] = useState("");
   const [photoLink, setPhotoLink] = useState("");
   const [addedPhoto, setAddedPhoto] = useState([]);
-  const [amenities, setAmenities] = useState([""]);
+  const [amenities, setAmenities] = useState([]);
   const [maxGuests, setMaxGuests] = useState();
   const [bedrooms, setBedrooms] = useState();
   const [beds, setBeds] = useState();
@@ -57,6 +57,18 @@ export default function NewPlaceModal() {
           return [...prev, ...filenames];
         });
       });
+  };
+
+  const handleAmenities = (ev) => {
+    const { name, checked } = ev.target;
+    console.log(name, checked);
+    if (checked) {
+      setAmenities([...amenities, name]);
+      
+    } else {
+      setAmenities([...amenities.filter((selected) => selected !== name)]);
+      
+    }
   };
   return (
     <div
@@ -168,7 +180,7 @@ export default function NewPlaceModal() {
                       </label>
                       {addedPhoto.length > 0 &&
                         addedPhoto.map((link) => (
-                          <div key={link} >
+                          <div key={link}>
                             <img
                               src={"http://localhost:5000/uploads/" + link}
                               alt={link}
@@ -187,42 +199,66 @@ export default function NewPlaceModal() {
                     </h2>
                     <div className="grid grid-cols-4 gap-3">
                       <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          onChange={handleAmenities}
+                          name="wifi"
+                        />
                         <FaWifi className="text-2xl" />
                         <h2 className="font-medium tracking-wider text-gray-500">
                           Wi-fi
                         </h2>
                       </label>
                       <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          onChange={handleAmenities}
+                          name="free-parking"
+                        />
                         <FaCarSide className="text-2xl " />
                         <h2 className="font-medium tracking-wider text-gray-500">
                           Free Parking
                         </h2>
                       </label>
                       <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          onChange={handleAmenities}
+                          name="tv"
+                        />
                         <PiTelevisionBold className="text-2xl" />
                         <h2 className="font-medium tracking-wider text-gray-500">
                           TV
                         </h2>
                       </label>
                       <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          onChange={handleAmenities}
+                          name="garden-view"
+                        />
                         <TbTrees className="text-2xl" />
                         <h2 className="font-medium tracking-wider text-gray-500">
                           Garden View
                         </h2>
                       </label>
                       <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          onChange={handleAmenities}
+                          name="pool-facility"
+                        />
                         <MdPool className="text-2xl" />
                         <h2 className="font-medium tracking-wider text-gray-500">
                           Pool Facility
                         </h2>
                       </label>
                       <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          onChange={handleAmenities}
+                          name="pets-allowed"
+                        />
                         <MdOutlinePets className="text-2xl" />
                         <h2 className="font-medium tracking-wider text-gray-500">
                           Pets Allowed
