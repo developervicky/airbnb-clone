@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { TiPlus } from "react-icons/ti";
 
-export default function AddPlaceModal() {
+export default function AddPlace() {
   return (
     <Link
       to={"/account/accommodations/new"}
