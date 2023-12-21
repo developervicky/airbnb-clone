@@ -10,6 +10,8 @@ const Token = require("./model/Token.js");
 const sendEmail = require("./utils/sendEmail.js");
 const crypto = require("crypto");
 const download = require("image-downloader");
+const multer = require("multer");
+const fs = require("fs");
 require("dotenv").config();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
@@ -181,7 +183,7 @@ app.post("/logout", (req, res) => {
 });
 
 console.log(__dirname);
-app.post("/uploads", async (req, res) => {
+app.post("/uploads_link", async (req, res) => {
   const { photoLink: link } = req.body;
   const newName = "photo" + Date.now() + ".jpg";
   await download.image({
@@ -193,4 +195,18 @@ app.post("/uploads", async (req, res) => {
   // res.send(dest);
 });
 
+const photoMiddleware = multer({ dest: "uploads/" });
+app.post("/uploads", photoMiddleware.array("photos", 100), async (req, res) => {
+  const uploadedFiles = [];
+  for (let i = 0; i < req.files.length; i++) {
+    // console.log(req.files[i]);
+    const { path, originalname } = req.files[i];
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    const newPath = path + "." + ext;
+    fs.renameSync(path, newPath);
+    uploadedFiles.push(newPath.replace("uploads\\", ""));
+  }
+  res.json(uploadedFiles);
+});
 app.listen(5000);

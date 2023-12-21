@@ -27,15 +27,36 @@ export default function NewPlaceModal() {
   const [checkOut, setCheckOut] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
 
-  const uploadPhoto = async (e) => {
+  const uploadPhotoByLink = async (e) => {
     e.preventDefault();
-    const { data: newname } = await axios.post("/uploads", { photoLink });
+    const { data: newname } = await axios.post("/uploads_link", { photoLink });
     console.log(newname);
     setAddedPhoto((prev) => {
       return [...prev, newname];
     });
     setPhotoLink("");
     console.log(addedPhoto);
+  };
+
+  const uploadPhoto = (ev) => {
+    // console.log(ev.target.files);
+    const files = ev.target.files;
+    const data = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      data.append("photos", files[i]);
+      // console.log(data);
+    }
+    axios
+      .post("/uploads", data, {
+        headers: { "Content-type": "multipart/form-data" },
+      })
+      .then((res) => {
+        const { data: filenames } = res;
+        console.log(filenames);
+        setAddedPhoto((prev) => {
+          return [...prev, ...filenames];
+        });
+      });
   };
   return (
     <div
@@ -127,25 +148,31 @@ export default function NewPlaceModal() {
                       />
                       <button>
                         <FiPlusCircle
-                          onClick={uploadPhoto}
+                          onClick={uploadPhotoByLink}
                           className="text-2xl text-gray-400 hover:text-primary"
                         />
                       </button>
                     </div>
                     <div className="grid gap-3 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 ">
-                      <button className="flex flex-col items-center justify-center gap-2 border-2  p-5 rounded-xl hover:border-primary ">
+                      <label className="h-32 flex flex-col items-center justify-center gap-2 border-2  p-5 rounded-xl cursor-pointer hover:border-primary ">
+                        <input
+                          type="file"
+                          multiple
+                          onChange={uploadPhoto}
+                          className="hidden"
+                        />
                         <IoCloudUploadOutline className="text-2xl text-gray-400" />
                         <div className="font-medium tracking-wider text-gray-400 ">
                           Upload Photo
                         </div>
-                      </button>
+                      </label>
                       {addedPhoto.length > 0 &&
                         addedPhoto.map((link) => (
-                          <div key={link}>
+                          <div key={link} >
                             <img
                               src={"http://localhost:5000/uploads/" + link}
                               alt={link}
-                              className=" border-2 rounded-xl hover:border-primary "
+                              className=" border-2 h-32 w-full rounded-xl object-cover hover:border-primary "
                             />
                           </div>
                         ))}
