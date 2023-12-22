@@ -1,19 +1,24 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const placeSchema = new mongoose.Schema({
-  owner: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+const placeSchema = new Schema({
+  ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+  ownerName: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   title: String,
   address: String,
+  country: String,
+  state: String,
+  city: String,
+  description: String,
+  photos: [String],
+  amenities: [String],
   maxGuests: Number,
   bedrooms: Number,
   beds: Number,
   bathrooms: Number,
-  description: String,
-  photos: [String],
-  amenities: [String],
+  checkIn: String,
+  checkOut: String,
   extraInfo: String,
-  checkIn: Number,
-  checkOut: Number,
 });
 
 const placeModel = mongoose.model("place", placeSchema);

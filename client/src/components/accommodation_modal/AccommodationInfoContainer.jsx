@@ -1,18 +1,24 @@
-import { useState } from "react";
 import { TbTrees } from "react-icons/tb";
 import { FaWifi, FaCarSide } from "react-icons/fa";
 import { MdPool, MdOutlinePets } from "react-icons/md";
 import { PiTelevisionBold } from "react-icons/pi";
 
-export default function AccommodationInfoContainer() {
-  const [amenities, setAmenities] = useState([]);
-  const [maxGuests, setMaxGuests] = useState();
-  const [bedrooms, setBedrooms] = useState();
-  const [beds, setBeds] = useState();
-  const [bathrooms, setBathrooms] = useState();
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
-
+export default function AccommodationInfoContainer({
+  amenities,
+  setAmenities,
+  maxGuests,
+  setMaxGuests,
+  bedrooms,
+  setBedrooms,
+  beds,
+  setBeds,
+  bathrooms,
+  setBathrooms,
+  checkIn,
+  setCheckIn,
+  checkOut,
+  setCheckOut,
+}) {
   const handleAmenities = (ev) => {
     const { name, checked } = ev.target;
     console.log(name, checked);

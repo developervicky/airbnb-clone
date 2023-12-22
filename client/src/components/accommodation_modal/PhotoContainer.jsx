@@ -1,12 +1,13 @@
-import { useState } from "react";
 import axios from "axios";
 import { FiPlusCircle } from "react-icons/fi";
 import { IoCloudUploadOutline } from "react-icons/io5";
 
-export default function PhotoContainer() {
-  const [photoLink, setPhotoLink] = useState("");
-  const [addedPhoto, setAddedPhoto] = useState([]);
-
+export default function PhotoContainer({
+  photoLink,
+  setPhotoLink,
+  addedPhoto,
+  setAddedPhoto,
+}) {
   const uploadPhotoByLink = async (e) => {
     e.preventDefault();
     const { data: newname } = await axios.post("/uploads_link", { photoLink });
