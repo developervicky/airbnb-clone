@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import BasicInfoContainer from "./BasicInfoContainer";
 import PhotoContainer from "./PhotoContainer";
@@ -29,33 +29,40 @@ export default function AccommodationModal() {
 
   const { id } = useParams();
   console.log(id);
-  const newAccommodation = async (e) => {
+  const saveAccommodation = async (e) => {
+    const accInfo = {
+      title,
+      address,
+      country,
+      state,
+      city,
+      description,
+      photoLink,
+      addedPhoto,
+      amenities,
+      maxGuests,
+      bedrooms,
+      beds,
+      bathrooms,
+      checkIn,
+      checkOut,
+      extraInfo,
+      price,
+    };
     e.preventDefault();
     try {
-      await axios.post("/accommodation", {
-        title,
-        address,
-        country,
-        state,
-        city,
-        description,
-        photoLink,
-        addedPhoto,
-        amenities,
-        maxGuests,
-        bedrooms,
-        beds,
-        bathrooms,
-        checkIn,
-        checkOut,
-        extraInfo,
-        price,
-      });
-      navigate("/account/accommodations");
+      if (id) {
+        await axios.put("/accommodation", { id, ...accInfo });
+        navigate("/account/accommodations");
+      } else {
+        await axios.post("/accommodation", accInfo);
+        navigate("/account/accommodations");
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (!id) {
       return;
@@ -81,6 +88,7 @@ export default function AccommodationModal() {
       setExtraInfo(data.extraInfo);
     });
   }, [id]);
+
   return (
     <div
       className="relative z-10"
@@ -91,7 +99,7 @@ export default function AccommodationModal() {
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto ">
         <div className="flex min-h-full items-end justify-center p-4 text-center md:p-6 sm:items-center sm:p-6">
-          <form onSubmit={newAccommodation} className="flex flex-col gap-4">
+          <form onSubmit={saveAccommodation} className="flex flex-col gap-4">
             <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-4xl">
               <div className=" bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 ">
                 <div className="mt-3 text-center sm:ml-2 sm:mt-0 sm:text-left">

@@ -259,6 +259,56 @@ app.post("/accommodation", async (req, res) => {
   }
 });
 
+app.put("/accommodation", (req, res) => {
+  const { token } = req.cookies;
+  const {
+    id,
+    title,
+    address,
+    country,
+    state,
+    city,
+    description,
+    addedPhoto: photos,
+    amenities,
+    maxGuests,
+    bedrooms,
+    beds,
+    bathrooms,
+    checkIn,
+    checkOut,
+    extraInfo,
+    price,
+  } = req.body;
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      const placeData = await Place.findById(id);
+      if (userData.id == userData.id.toString()) {
+        placeData.set({
+          title,
+          address,
+          country,
+          state,
+          city,
+          description,
+          addedPhoto: photos,
+          amenities,
+          maxGuests,
+          bedrooms,
+          beds,
+          bathrooms,
+          checkIn,
+          checkOut,
+          extraInfo,
+          price,
+        });
+        await placeData.save();
+        res.json("Updated");
+      }
+    });
+  }
+});
+
 app.get("/placeFind", (req, res) => {
   const { token } = req.cookies;
   if (token) {
