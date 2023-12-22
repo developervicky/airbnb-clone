@@ -12,6 +12,7 @@ const crypto = require("crypto");
 const download = require("image-downloader");
 const multer = require("multer");
 const fs = require("fs");
+const Place = require("./model/Place.js");
 require("dotenv").config();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
@@ -209,4 +210,51 @@ app.post("/uploads", photoMiddleware.array("photos", 100), async (req, res) => {
   }
   res.json(uploadedFiles);
 });
+
+app.post("/accommodation", async (req, res) => {
+  const { token } = req.cookies;
+  const {
+    title,
+    address,
+    country,
+    state,
+    city,
+    description,
+    addedPhoto,
+    amenities,
+    maxGuests,
+    bedrooms,
+    beds,
+    bathrooms,
+    checkIn,
+    checkOut,
+    extraInfo,
+  } = req.body;
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      console.log(userData);
+      const placeData = await Place.create({
+        ownerId: userData.id,
+        title,
+        address,
+        country,
+        state,
+        city,
+        description,
+        addedPhoto,
+        amenities,
+        maxGuests,
+        bedrooms,
+        beds,
+        bathrooms,
+        checkIn,
+        checkOut,
+        extraInfo,
+      });
+      res.json(placeData);
+    });
+  }
+});
+
 app.listen(5000);
