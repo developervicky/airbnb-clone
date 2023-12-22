@@ -7,10 +7,8 @@ function AccommodationPage() {
   console.log(action);
 
   return (
-    <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
-        <AddPlace />
-      </div>
+    <div className="flex flex-col grow justify-between">
+      <AddPlace />
       {action === "new" && <AccommodationModal />}
     </div>
   );

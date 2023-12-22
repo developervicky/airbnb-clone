@@ -1,7 +1,7 @@
 import React from "react";
 
 function BookingPage() {
-  return <div>BookingPage</div>;
+  return <div className="flex grow">BookingPage</div>;
 }
 
 export default BookingPage;

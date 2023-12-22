@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link,  useNavigate, useParams } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import BasicInfoContainer from "./BasicInfoContainer";
 import PhotoContainer from "./PhotoContainer";

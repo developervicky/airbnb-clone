@@ -37,7 +37,7 @@ function AccountPage() {
   };
 
   return (
-    <div className="w-3/4 mx-auto flex flex-col  ">
+    <div className="w-3/4 mx-auto flex flex-col justify-between grow  ">
       <nav className="flex justify-between mb-12 gap-3">
         <Link className={topbarStyle("profile")} to={"/account/profile"}>
           Profile
