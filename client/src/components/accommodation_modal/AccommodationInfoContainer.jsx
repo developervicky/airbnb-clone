@@ -18,6 +18,8 @@ export default function AccommodationInfoContainer({
   setCheckIn,
   checkOut,
   setCheckOut,
+  price,
+  setPrice,
 }) {
   const handleAmenities = (ev) => {
     const { name, checked } = ev.target;
@@ -37,13 +39,19 @@ export default function AccommodationInfoContainer({
       <h2 className="text-md tracking-wider font-semibold">Amenities</h2>
       <div className="grid grid-cols-4 gap-3">
         <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-          <input type="checkbox" onChange={handleAmenities} name="wifi" />
+          <input
+            type="checkbox"
+            checked={amenities.includes("wifi")}
+            onChange={handleAmenities}
+            name="wifi"
+          />
           <FaWifi className="text-2xl" />
           <h2 className="font-medium tracking-wider text-gray-500">Wi-fi</h2>
         </label>
         <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
           <input
             type="checkbox"
+            checked={amenities.includes("free-parking")}
             onChange={handleAmenities}
             name="free-parking"
           />
@@ -53,7 +61,12 @@ export default function AccommodationInfoContainer({
           </h2>
         </label>
         <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
-          <input type="checkbox" onChange={handleAmenities} name="tv" />
+          <input
+            type="checkbox"
+            onChange={handleAmenities}
+            checked={amenities.includes("tv")}
+            name="tv"
+          />
           <PiTelevisionBold className="text-2xl" />
           <h2 className="font-medium tracking-wider text-gray-500">TV</h2>
         </label>
@@ -61,6 +74,7 @@ export default function AccommodationInfoContainer({
           <input
             type="checkbox"
             onChange={handleAmenities}
+            checked={amenities.includes("garden-view")}
             name="garden-view"
           />
           <TbTrees className="text-2xl" />
@@ -71,6 +85,7 @@ export default function AccommodationInfoContainer({
         <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
           <input
             type="checkbox"
+            checked={amenities.includes("pool-facility")}
             onChange={handleAmenities}
             name="pool-facility"
           />
@@ -142,6 +157,16 @@ export default function AccommodationInfoContainer({
             className="w-full flex flex-row items-center rounded-lg gap-4 border-2 p-4 cursor-pointer focus:outline-none hover:border-primary focus:border-primary"
           />
         </div>
+      </div>
+      <h2 className="text-md tracking-wider font-semibold">Pricings</h2>
+      <div className="grid grid-cols-3 gap-3">
+        <input
+          type="text"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          placeholder="Price per night ($150)"
+          className="w-full flex flex-row items-center rounded-lg gap-4 border-2 p-4 cursor-pointer focus:outline-none hover:border-primary focus:border-primary"
+        />
       </div>
     </div>
   );

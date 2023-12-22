@@ -1,7 +1,5 @@
-import React from "react";
 import {
   Route,
-  Routes,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
@@ -11,9 +9,9 @@ import SignupPage from "../pages/SignupPage";
 import Layout from "../Layout/Layout";
 import axios from "axios";
 import AccountPage from "../pages/AccountPage";
-import BookingPage from "../pages/BookingPage";
-import AccommodationPage from "../pages/AccommodationPage";
 import EmailVerify from "../common/EmailVerify/EmailVerify";
+import UserAccommodationPage from "../pages/UserAccommodationPage";
+import ErrorPage from "../pages/ErrorPage";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -26,6 +24,11 @@ const router = createBrowserRouter(
       <Route path="signup" element={<SignupPage />} />
       <Route path="/account/:subpage?" element={<AccountPage />} />
       <Route path="/account/:subpage/:action" element={<AccountPage />} />
+      <Route
+        path="/account/:subpage/:action/:id"
+        element={<UserAccommodationPage />}
+      />
+      <Route path="error" element={<ErrorPage />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
     </Route>
   )

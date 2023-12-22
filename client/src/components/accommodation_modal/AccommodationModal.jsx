@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import BasicInfoContainer from "./BasicInfoContainer";
 import PhotoContainer from "./PhotoContainer";
@@ -7,7 +7,7 @@ import AccommodationInfoContainer from "./AccommodationInfoContainer";
 import ExtraInfoConatainer from "./ExtraInfoContainer";
 import axios from "axios";
 
-export default function NewPlaceModal() {
+export default function AccommodationModal() {
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
@@ -24,8 +24,11 @@ export default function NewPlaceModal() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
+  const [price, setPrice] = useState("");
   const navigate = useNavigate();
 
+  const { id } = useParams();
+  console.log(id);
   const newAccommodation = async (e) => {
     e.preventDefault();
     try {
@@ -46,13 +49,38 @@ export default function NewPlaceModal() {
         checkIn,
         checkOut,
         extraInfo,
+        price,
       });
       navigate("/account/accommodations");
     } catch (error) {
       console.log(error);
     }
   };
-
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    axios.get(`/user/${id}`).then((res) => {
+      const { data } = res;
+      console.log(data.photos);
+      setTitle(data.title);
+      setAddress(data.address);
+      setCountry(data.country);
+      setState(data.state);
+      setCity(data.city);
+      setDescription(data.description);
+      setAddedPhoto(data.photos);
+      setAmenities(data.amenities);
+      setMaxGuests(data.maxGuests);
+      setBedrooms(data.bedrooms);
+      setBeds(data.beds);
+      setBathrooms(data.bathrooms);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setPrice(data.price);
+      setExtraInfo(data.extraInfo);
+    });
+  }, [id]);
   return (
     <div
       className="relative z-10"
@@ -74,7 +102,13 @@ export default function NewPlaceModal() {
                     >
                       Post your Accommodation Info
                     </h1>
-                    <Link to={"/account/accommodations/"}>
+                    <Link
+                      to={
+                        !id
+                          ? "/account/accommodations/"
+                          : `/account/accommodations/user/${id}`
+                      }
+                    >
                       <AiOutlineCloseCircle
                         type="button"
                         className="text-3xl hover:text-white hover:bg-primary hover:rounded-full"
@@ -117,6 +151,8 @@ export default function NewPlaceModal() {
                     setCheckIn={setCheckIn}
                     checkOut={checkOut}
                     setCheckOut={setCheckOut}
+                    price={price}
+                    setPrice={setPrice}
                   />
                   <ExtraInfoConatainer
                     extraInfo={extraInfo}

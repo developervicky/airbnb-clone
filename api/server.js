@@ -220,7 +220,7 @@ app.post("/accommodation", async (req, res) => {
     state,
     city,
     description,
-    addedPhoto,
+    addedPhoto: photos,
     amenities,
     maxGuests,
     bedrooms,
@@ -229,6 +229,7 @@ app.post("/accommodation", async (req, res) => {
     checkIn,
     checkOut,
     extraInfo,
+    price,
   } = req.body;
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -242,7 +243,7 @@ app.post("/accommodation", async (req, res) => {
         state,
         city,
         description,
-        addedPhoto,
+        photos,
         amenities,
         maxGuests,
         bedrooms,
@@ -251,9 +252,30 @@ app.post("/accommodation", async (req, res) => {
         checkIn,
         checkOut,
         extraInfo,
+        price,
       });
       res.json(placeData);
     });
+  }
+});
+
+app.get("/placeFind", (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      const { id } = userData;
+      res.json(await Place.find({ ownerId: id }));
+    });
+  }
+});
+
+app.get("/user/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.json(await Place.findById(id));
+  } catch (error) {
+    res.json(error);
   }
 });
 
