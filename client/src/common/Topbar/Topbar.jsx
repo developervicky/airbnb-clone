@@ -20,7 +20,7 @@ function Topbar() {
 
   return (
     <div className="sticky top-0 bg-white">
-      <header className="py-6 flex justify-around gap-4">
+      <header className="py-6 flex justify-around gap-4 px-4">
         <a href="/" className="flex items-center gap-2">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"

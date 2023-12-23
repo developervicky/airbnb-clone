@@ -1,6 +1,8 @@
 import axios from "axios";
 import { FiPlusCircle } from "react-icons/fi";
 import { IoCloudUploadOutline } from "react-icons/io5";
+import { MdOutlineDelete } from "react-icons/md";
+import { FaStar } from "react-icons/fa";
 
 export default function PhotoContainer({
   photoLink,
@@ -39,6 +41,21 @@ export default function PhotoContainer({
         });
       });
   };
+
+  const deletePhoto = (e, filename) => {
+    e.preventDefault();
+    setAddedPhoto([...addedPhoto.filter((photo) => photo !== filename)]);
+    console.log(addedPhoto);
+  };
+
+  const starImg = (e, filename) => {
+    e.preventDefault();
+    setAddedPhoto([
+      filename,
+      ...addedPhoto.filter((photo) => photo !== filename),
+    ]);
+  };
+
   return (
     <div className="flex flex-col gap-4 p-2 pb-6 border-b-2">
       <h2 className="text-lg tracking-wider font-semibold">Photos</h2>
@@ -57,7 +74,7 @@ export default function PhotoContainer({
           />
         </button>
       </div>
-      <div className="grid gap-3 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 ">
+      <div className="grid gap-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 ">
         <label className="h-32 flex flex-col items-center justify-center gap-2 border-2  p-5 rounded-xl cursor-pointer hover:border-primary ">
           <input
             type="file"
@@ -72,12 +89,33 @@ export default function PhotoContainer({
         </label>
         {addedPhoto.length > 0 &&
           addedPhoto.map((link) => (
-            <div key={link}>
+            <div key={link} className="relative">
               <img
                 src={"http://localhost:5000/uploads/" + link}
                 alt={link}
                 className=" border-2 h-32 w-full rounded-xl object-cover hover:border-primary "
               />
+              {link == addedPhoto[0] ? (
+                <button
+                  onClick={(e) => starImg(e, link)}
+                  className="absolute text-xl bottom-2 left-2 rounded-full p-1.5 cursor-pointer bg-primary/75 text-white"
+                >
+                  <FaStar />
+                </button>
+              ) : (
+                <button
+                  onClick={(e) => starImg(e, link)}
+                  className="absolute text-xl bottom-2 left-2 bg-white/75 rounded-full p-1.5 cursor-pointer hover:bg-primary/75 hover:text-white"
+                >
+                  <FaStar />
+                </button>
+              )}
+              <button
+                onClick={(e) => deletePhoto(e, link)}
+                className="absolute text-xl bottom-2 right-2 bg-white/75 rounded-full p-1.5 cursor-pointer hover:bg-primary/75 hover:text-white"
+              >
+                <MdOutlineDelete />
+              </button>
             </div>
           ))}
       </div>

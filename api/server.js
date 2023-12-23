@@ -291,7 +291,7 @@ app.put("/accommodation", (req, res) => {
           state,
           city,
           description,
-          addedPhoto: photos,
+          photos,
           amenities,
           maxGuests,
           bedrooms,
