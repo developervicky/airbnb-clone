@@ -14,7 +14,6 @@ function AccountPage() {
   if (subpage == undefined) {
     subpage = "profile";
   }
-  console.log(subpage);
 
   if (!ready) {
     return (

@@ -4,7 +4,6 @@ import AddPlace from "../components/AddPlace";
 
 function AccommodationPage() {
   const { action } = useParams();
-  console.log(action);
 
   return (
     <div className="flex flex-col grow justify-between">

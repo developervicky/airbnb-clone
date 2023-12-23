@@ -48,7 +48,6 @@ function SignupPage() {
     setProgress(`${(verifiedList.length / 5) * 100}%`);
     setMessage(strength);
 
-    console.log("verifiedList: ", `${(verifiedList.length / 5) * 100}%`);
   };
 
   const getActiveColor = (type) => {
@@ -67,7 +66,6 @@ function SignupPage() {
         password,
       });
 
-      console.log(data);
       // .then(({ data }) => {
       //   setUser(data);
       // });

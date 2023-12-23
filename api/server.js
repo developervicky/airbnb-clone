@@ -329,4 +329,8 @@ app.get("/user/:id", async (req, res) => {
   }
 });
 
+app.get("/home-place", async (req, res) => {
+  res.json(await Place.find());
+});
+
 app.listen(5000);

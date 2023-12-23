@@ -13,12 +13,10 @@ export default function PhotoContainer({
   const uploadPhotoByLink = async (e) => {
     e.preventDefault();
     const { data: newname } = await axios.post("/uploads_link", { photoLink });
-    console.log(newname);
     setAddedPhoto((prev) => {
       return [...prev, newname];
     });
     setPhotoLink("");
-    console.log(addedPhoto);
   };
 
   const uploadPhoto = (ev) => {
@@ -35,7 +33,6 @@ export default function PhotoContainer({
       })
       .then((res) => {
         const { data: filenames } = res;
-        console.log(filenames);
         setAddedPhoto((prev) => {
           return [...prev, ...filenames];
         });
@@ -45,7 +42,6 @@ export default function PhotoContainer({
   const deletePhoto = (e, filename) => {
     e.preventDefault();
     setAddedPhoto([...addedPhoto.filter((photo) => photo !== filename)]);
-    console.log(addedPhoto);
   };
 
   const starImg = (e, filename) => {

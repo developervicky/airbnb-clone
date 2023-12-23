@@ -23,7 +23,6 @@ export default function AccommodationInfoContainer({
 }) {
   const handleAmenities = (ev) => {
     const { name, checked } = ev.target;
-    console.log(name, checked);
     if (checked) {
       setAmenities([...amenities, name]);
     } else {

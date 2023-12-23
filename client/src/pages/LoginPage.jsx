@@ -23,10 +23,8 @@ function LoginPage() {
         })
         .then((res) => {
           if (res.status == 202) {
-            console.log(res.status);
             Toastify("fail", `${res.data.message}`);
           } else {
-            console.log(res.data);
             setUser(res.data);
             Toastify("success", "Successful Login!");
             setRedirect(true);

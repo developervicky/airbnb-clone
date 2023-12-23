@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 
 export const Toastify = (mode, msg) => {
-  console.log(mode, msg);
   if (mode === "success") {
     toast.success(`${msg}`, {
       position: "bottom-right",

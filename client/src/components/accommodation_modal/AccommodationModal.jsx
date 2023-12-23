@@ -28,7 +28,7 @@ export default function AccommodationModal() {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id);
+
   const saveAccommodation = async (e) => {
     const accInfo = {
       title,
@@ -69,7 +69,6 @@ export default function AccommodationModal() {
     }
     axios.get(`/user/${id}`).then((res) => {
       const { data } = res;
-      console.log(data.photos);
       setTitle(data.title);
       setAddress(data.address);
       setCountry(data.country);

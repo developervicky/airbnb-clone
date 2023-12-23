@@ -12,9 +12,9 @@ function Topbar() {
     await axios.post("/logout");
     setRedirect("/");
   };
-
-  console.log(redirect);
+  // console.log(`"${redirect}"`);
   if (redirect) {
+    console.log(redirect);
     return <Navigate to={redirect} />;
   }
 

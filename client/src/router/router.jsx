@@ -19,7 +19,7 @@ axios.defaults.withCredentials = true;
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="home" element={<Homepage />} />
+      <Route index element={<Homepage />} />
       <Route path="signin" element={<LoginPage />} />
       <Route path="signup" element={<SignupPage />} />
       <Route path="/account/:subpage?" element={<AccountPage />} />

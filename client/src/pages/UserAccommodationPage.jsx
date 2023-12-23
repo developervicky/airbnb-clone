@@ -9,18 +9,15 @@ import ErrorPage from "../pages/ErrorPage"
 function UserAccommodationPage() {
   const [place, setplace] = useState([]);
   const { action, id } = useParams();
-  console.log(action, id);
   useEffect(() => {
     try {
       axios.get(`/user/${id}`).then(({ data }) => {
-        console.log([data]);
         setplace(data);
       });
     } catch (error) {
       console.log(error);
     }
   }, [id]);
-  console.log(id);
   return (
     <>
       {id == place._id ? (
