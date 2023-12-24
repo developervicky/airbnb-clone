@@ -9,7 +9,7 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuDot } from "react-icons/lu";
 import { FaCarSide, FaWifi } from "react-icons/fa";
 import { PiTelevisionBold } from "react-icons/pi";
-import { MdPool } from "react-icons/md";
+import { MdOutlinePhotoLibrary, MdPool } from "react-icons/md";
 
 function UserAccommodationPage() {
   const [place, setplace] = useState([]);
@@ -85,6 +85,10 @@ function UserAccommodationPage() {
                   </div>
                 </div>
               )}
+              <Link className="absolute flex gap-3 items-center bottom-4 right-4 bg-gray-300 bg-opacity-75 p-4 rounded-xl  hover:bg-primary hover:bg-opacity-75 hover:text-white">
+                <MdOutlinePhotoLibrary className="text-xl" />
+                <p>See more</p>
+              </Link>
             </div>
             <div className="grid grid-cols-[2fr_1fr]">
               <div className="py-5">
@@ -100,14 +104,20 @@ function UserAccommodationPage() {
                   <h1 className=" text-2xl font-bold tracking-wide">
                     The Place offers
                   </h1>
-                  <p className="flex flex-row gap-1 items-center text-xl tracking-wide leading-8">
-                    {place.maxGuests} guests
-                    <LuDot className="text-2xl" />
-                    {place.bedrooms} bedrooms
-                    <LuDot className="text-2xl" />
-                    {place.beds} beds
-                    <LuDot className="text-2xl" />
-                    {place.bathrooms} bathrooms
+                  <p className="flex flex-row  gap-1 items-center md:text-md  text-xl tracking-wide  leading-8">
+                    <div className="flex items-center">
+                      <span>{place.maxGuests} guests</span>
+                      <LuDot className="text-2xl" />
+                    </div>
+                    <div className="flex items-center">
+                      <span>{place.bedrooms} bedrooms</span>
+                      <LuDot className="text-2xl" />{" "}
+                    </div>
+                    <div className="flex items-center">
+                      <span>{place.beds} beds</span>
+                      <LuDot className="text-2xl" />
+                    </div>
+                    <span>{place.bathrooms} bathrooms</span>
                   </p>
                   <div className="grid grid-cols-3 items-center gap-8 pt-5 pb-3">
                     {place.amenities.map((each) => {
@@ -163,13 +173,16 @@ function UserAccommodationPage() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-start justify-center  p-10">
-                <div className="flex flex-col justify-start border-2 px-10 py-8 gap-6 rounded-2xl shadow-xl">
+              <div className=" flex h-fit items-start justify-center  p-10">
+                <form
+                  action=""
+                  className="sticky flex flex-col  justify-start border-2  px-10 py-8 gap-6 rounded-2xl shadow-xl"
+                >
                   <h1 className="text-2xl font-bold tracking-wider">
                     {place.price}/night
                   </h1>
-                  <div className=" flex flex-col border-2 border-primary rounded-2xl">
-                    <div className="flex border-b-2 border-primary ">
+                  <div className=" flex flex-col border-2 border-primary pr-5 rounded-2xl">
+                    <div className="flex border-b-2 border-primary  ">
                       <div className=" border-r-2 border-primary p-3">
                         <label className="flex flex-col tracking-wide gap-2 p-2 px-6 font-semibold cursor-pointer">
                           Check-In
@@ -187,7 +200,7 @@ function UserAccommodationPage() {
                       <label className="flex flex-col tracking-wide gap-2 py-4  px-6 font-semibold cursor-pointer">
                         No of Guests
                         <input
-                          type="text"
+                          type="number"
                           className="font-medium border-2 rounded-2xl p-2 outline-none hover:border-primary focus:border-primary  "
                         />
                       </label>
@@ -196,7 +209,7 @@ function UserAccommodationPage() {
                   <button className="border-2 p-4  font-bold tracking-wide rounded-2xl bg-primary text-white">
                     Book your Room
                   </button>
-                </div>
+                </form>
               </div>
             </div>
           </div>
