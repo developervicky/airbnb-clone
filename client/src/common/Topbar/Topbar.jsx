@@ -2,24 +2,30 @@ import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../../components/UserContext";
 import { LuLogOut } from "react-icons/lu";
+import { Toastify } from "../toastify/Toastify";
 import axios from "axios";
 function Topbar() {
-  const [redirect, setRedirect] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  const logout = async () => {
-    await axios.post("/logout");
-    setRedirect("/");
-  };
-  // console.log(`"${redirect}"`);
   if (redirect) {
-    console.log(redirect);
-    return <Navigate to={redirect} />;
+    // location.reload();
+    setUser(null);
+    setRedirect(false);
+    // return <Navigate to="/" />;
   }
 
+  const logout = async () => {
+    await axios.post("/logout").then((res) => {
+      // console.log(res);
+      Toastify("success", `${res.data}`);
+      setRedirect(true);
+    });
+  };
+
   return (
-    <div className="sticky top-0 bg-white">
+    <div className="sticky z-50 top-0 bg-white">
       <header className="py-6 flex justify-around gap-4 px-4">
         <a href="/" className="flex items-center gap-2">
           {/* <svg
@@ -51,7 +57,7 @@ function Topbar() {
             />
           </svg>
 
-          <span className="text-xl font-medium text-2xl text-primary tracking-wider">
+          <span className="text-2xl font-medium text-2xl text-primary tracking-wider">
             trip<span className="font-bold">R</span>over
           </span>
         </a>
@@ -96,7 +102,7 @@ function Topbar() {
               />
             </svg>
             {user ? (
-              <div className="font-semibold text-gray-500 tracking-wider ">
+              <div className="text-lg font-semibold text-gray-500 tracking-wider ">
                 {user.fname}
               </div>
             ) : (
@@ -106,16 +112,16 @@ function Topbar() {
             )}
           </Link>
           {user && (
-            <Link
+            <button
               className="flex border-2 border-gray-200 rounded-full py-2 pr-4 pl-5 gap-2 font-medium items-center shadow-md shadow-gray-200 hover:text-white hover:bg-primary"
               onClick={logout}
             >
               <LuLogOut />
-            </Link>
+            </button>
           )}
         </div>
       </header>
-      <div className="border-t pb-6"></div>
+      <div className="border-t-2 "></div>
     </div>
   );
 }
