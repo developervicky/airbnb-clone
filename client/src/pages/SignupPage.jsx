@@ -47,7 +47,6 @@ function SignupPage() {
     setPassword(passwordValue);
     setProgress(`${(verifiedList.length / 5) * 100}%`);
     setMessage(strength);
-
   };
 
   const getActiveColor = (type) => {
@@ -71,6 +70,10 @@ function SignupPage() {
       // });
       // setRedirect(true);
       Toastify("success", "Verification Email Sent!");
+      setFname("");
+      setLname("");
+      setEmail("");
+      setPassword("");
     } catch (e) {
       Toastify("fail", "Cannot Create an Account!");
     }
@@ -80,7 +83,7 @@ function SignupPage() {
   }
 
   return (
-    <div className="flex flex-col grow justify-center items-center gap-5 mb-36">
+    <div className="flex flex-col justify-center grow   items-center gap-5 ">
       <div className=" text-3xl font-bold">
         Welcome to
         <span className="text-3xl font-medium text-primary tracking-wider">
@@ -117,7 +120,7 @@ function SignupPage() {
         />
 
         <div className="input-container">
-          <div className="flex flex-row items-center border-2 rounded-full ps-0 pe-2 py-0">
+          <div className="flex flex-row items-center border-2 rounded-full ps-0 pe-2 py-0 bg-white">
             <input
               value={password}
               onChange={({ target }) => {
@@ -179,7 +182,7 @@ function SignupPage() {
             </button>
           </div>
         ) : (
-          <div className="flex justify-center items-stretch border-2 rounded-full">
+          <div className="flex justify-center items-stretch border-2 rounded-full bg-white">
             <button
               className="border-none w-96 py-3 font-semibold tracking-widest"
               disabled

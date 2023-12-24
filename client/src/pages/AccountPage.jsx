@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { UserContext } from "../components/UserContext";
 import { Navigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import RiseLoader from "react-spinners/RiseLoader";
 import AccommodationPage from "./AccommodationPage";
 import ProfilePage from "./ProfilePage";
 import BookingPage from "./BookingPage";
+import LoadingPage from "./LoadingPage";
 
 function AccountPage() {
   const { ready, user } = useContext(UserContext);
@@ -16,11 +16,7 @@ function AccountPage() {
   }
 
   if (!ready) {
-    return (
-      <div className="flex h-96 justify-center items-end">
-        <RiseLoader color="#17A191" />
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   if (!user && ready) {
@@ -28,32 +24,35 @@ function AccountPage() {
   }
 
   const topbarStyle = (type) => {
-    let classes = "px-7 py-4 font-semibold tracking-wider";
+    let classes =
+      "text-xl px-7 pb-4 pt-2 font-semibold tracking-wider hover:border-b-2 hover:border-primary hover:text-primary";
     if (type === subpage) {
-      classes += " bg-primary rounded-full text-white";
+      classes += " border-b-2 border-primary text-primary";
     }
     return classes;
   };
 
   return (
-    <div className="w-3/4 mx-auto flex flex-col justify-between grow  ">
-      <nav className="flex justify-between mb-12 gap-3">
-        <Link className={topbarStyle("profile")} to={"/account/profile"}>
-          Profile
-        </Link>
-        <Link className={topbarStyle("bookings")} to={"/account/bookings"}>
-          Bookings
-        </Link>
-        <Link
-          className={topbarStyle("accommodations")}
-          to={"/account/accommodations"}
-        >
-          Your Own Accommodations
-        </Link>
-      </nav>
-      {subpage === "profile" && <ProfilePage />}
-      {subpage === "bookings" && <BookingPage />}
-      {subpage === "accommodations" && <AccommodationPage />}
+    <div className="flex flex-col py-6 grow justify-between  ">
+      <div className="w-10/12  mx-auto  ">
+        <nav className="flex justify-between mb-12 gap-3">
+          <Link className={topbarStyle("profile")} to={"/account/profile"}>
+            Profile
+          </Link>
+          <Link className={topbarStyle("bookings")} to={"/account/bookings"}>
+            Bookings
+          </Link>
+          <Link
+            className={topbarStyle("accommodations")}
+            to={"/account/accommodations"}
+          >
+            Your Own Accommodations
+          </Link>
+        </nav>
+        {subpage === "profile" && <ProfilePage />}
+        {subpage === "bookings" && <BookingPage />}
+        {subpage === "accommodations" && <AccommodationPage />}
+      </div>
     </div>
   );
 }

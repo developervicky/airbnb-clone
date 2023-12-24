@@ -4,7 +4,7 @@ import { UserContext } from "../components/UserContext";
 function ProfilePage() {
   const { user } = useContext(UserContext);
   return (
-    <div className="flex flex-col grow gap-4 items-start  ">
+    <div className="flex flex-col gap-4 items-start  ">
       <div className="font-extrabold text-4xl tracking-wider ">Account</div>
       <div className="text-xl tracking-wider">
         <span className="font-semibold">{user.fname + " " + user.lname}</span>,{" "}
