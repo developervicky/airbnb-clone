@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const placeSchema = new Schema({
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   ownerName: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
-  title: String,
+  title: { type: String, required: true },
   address: String,
   country: String,
   state: String,
@@ -19,7 +19,7 @@ const placeSchema = new Schema({
   checkIn: String,
   checkOut: String,
   extraInfo: String,
-  price: Number,
+  price: { type: Number, required: true },
 });
 
 const placeModel = mongoose.model("place", placeSchema);

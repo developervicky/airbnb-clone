@@ -31,6 +31,15 @@ app.use(
 
 mongoose.connect(process.env.MONGO_URL);
 
+function getUserDatafromToken(req) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData);
+    });
+  });
+}
+
 app.get("/test", (req, res) => {
   console.log("hi");
   res.json("hello");
@@ -281,32 +290,36 @@ app.put("/accommodation", (req, res) => {
     extraInfo,
     price,
   } = req.body;
-  if (token) {
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-      const placeData = await Place.findById(id);
-      if (userData.id == userData.id.toString()) {
-        placeData.set({
-          title,
-          address,
-          country,
-          state,
-          city,
-          description,
-          photos,
-          amenities,
-          maxGuests,
-          bedrooms,
-          beds,
-          bathrooms,
-          checkIn,
-          checkOut,
-          extraInfo,
-          price,
-        });
-        await placeData.save();
-        res.json("Updated");
-      }
-    });
+  try {
+    if (token) {
+      jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        const placeData = await Place.findById(id);
+        if (userData.id == userData.id.toString()) {
+          placeData.set({
+            title,
+            address,
+            country,
+            state,
+            city,
+            description,
+            photos,
+            amenities,
+            maxGuests,
+            bedrooms,
+            beds,
+            bathrooms,
+            checkIn,
+            checkOut,
+            extraInfo,
+            price,
+          });
+          await placeData.save();
+          res.json("Updated");
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
@@ -334,7 +347,8 @@ app.get("/home-place", async (req, res) => {
   res.json(await Place.find());
 });
 
-app.post("/bookings", (req, res) => {
+app.post("/bookings", async (req, res) => {
+  const userData = await getUserDatafromToken(req);
   const {
     checkinDate,
     checkoutDate,
@@ -344,6 +358,7 @@ app.post("/bookings", (req, res) => {
     phone,
     place,
     price,
+    ownerId,
   } = req.body;
   Booking.create({
     checkinDate,
@@ -354,6 +369,8 @@ app.post("/bookings", (req, res) => {
     phone,
     place,
     price,
+    user: userData.id,
+    ownerId,
   })
     .then((data) => {
       res.json(data);
@@ -361,6 +378,20 @@ app.post("/bookings", (req, res) => {
     .catch((err) => {
       throw err;
     });
+});
+
+app.get("/bookings", async (req, res) => {
+  try {
+    const userData = await getUserDatafromToken(req);
+    res.json(await Booking.find({ user: userData.id }).populate("place"));
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+app.get("/accbookings", async (req, res) => {
+  const userData = await getUserDatafromToken(req);
+  res.json(await Booking.find({ ownerId: userData.id }).populate("place"));
 });
 
 app.listen(5000);

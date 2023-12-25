@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link,  useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import BasicInfoContainer from "./BasicInfoContainer";
 import PhotoContainer from "./PhotoContainer";
 import AccommodationInfoContainer from "./AccommodationInfoContainer";
 import ExtraInfoConatainer from "./ExtraInfoContainer";
 import axios from "axios";
+import { Toastify } from "../../common/toastify/Toastify";
 
 export default function AccommodationModal() {
   const [title, setTitle] = useState("");
@@ -59,6 +60,7 @@ export default function AccommodationModal() {
         navigate("/account/accommodations");
       }
     } catch (error) {
+      Toastify("fail", "Fill the form");
       console.log(error);
     }
   };

@@ -7,11 +7,12 @@ import { Navigate } from "react-router-dom";
 
 export default function AccBooking({ place }) {
   const { user } = useContext(UserContext);
-  const userFullName = user.fname + " " + user.lname;
   const [checkinDate, setCheckInDate] = useState();
   const [checkoutDate, setCheckOutDate] = useState();
   const [noGuests, setNoGuests] = useState(1);
-  const [fullName, setFullName] = useState(user ? userFullName : "");
+  const [fullName, setFullName] = useState(
+    user ? user.fname + " " + user.lname : ""
+  );
   const [email, setEmail] = useState(user ? user.email : "");
   const [phone, setPhone] = useState();
   const [redirect, setRedirect] = useState("");
@@ -27,18 +28,24 @@ export default function AccBooking({ place }) {
   let price = numberOfNights * place.price * noGuests;
 
   const bookAcc = async () => {
-    const response = await axios.post("/bookings", {
-      checkinDate,
-      checkoutDate,
-      noGuests,
-      fullName,
-      email,
-      phone,
-      place: place._id,
-      price: price,
-    });
-    const bookingId = response.data._id;
-    setRedirect(`/account/bookings/${bookingId}`);
+    try {
+      const response = await axios.post("/bookings", {
+        checkinDate,
+        checkoutDate,
+        noGuests,
+        fullName,
+        email,
+        phone,
+        place: place._id,
+        ownerId: place.ownerId,
+        price: price,
+      });
+      const bookingId = response.data._id;
+      setRedirect(`/account/bookings/${bookingId}`);
+    } catch (error) {
+      
+      return error;
+    }
   };
   if (redirect) {
     return <Navigate to={redirect} />;
