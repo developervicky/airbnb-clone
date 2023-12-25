@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { UserContext } from "../../components/UserContext";
 import { LuLogOut } from "react-icons/lu";
 import { Toastify } from "../toastify/Toastify";

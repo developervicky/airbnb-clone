@@ -30,7 +30,7 @@ function UserAccommodationPage() {
     <>
       {id == place._id ? (
         <div className=" flex flex-col grow ">
-          <div className="flex flex-col gap-2 py-8 w-9/12 mx-auto   ">
+          <div className="flex flex-col gap-2 py-8  mx-auto w-11/12 md:w-11/12 lg:w-10/12 xl:w-9/12  ">
             <div className="flex justify-between items-center">
               <h2 className="text-3xl font-medium tracking-wide">
                 {place.title}
@@ -61,9 +61,9 @@ function UserAccommodationPage() {
                 {place.city}, {place.country}
               </a>
             </div>
-            <div className="  relative pt-7">
+            <div className=" relative pt-7">
               {place.photos[0] && (
-                <div className=" border-2 grid grid-cols-[2fr_1fr] gap-2 overflow-hidden rounded-3xl">
+                <div className=" grid grid-cols-[2fr_1fr] gap-2 overflow-hidden rounded-3xl ">
                   <div>
                     <img
                       src={"http://localhost:5000/uploads/" + place.photos[0]}
@@ -90,114 +90,131 @@ function UserAccommodationPage() {
                 <p>See more</p>
               </Link>
             </div>
-            <div className="grid grid-cols-[2fr_1fr]">
-              <div className="py-5">
+            <div className="flex flex-col flex-col-reverse items-center gap-3 lg:items-start  lg:grid lg:grid-cols-[2fr_1fr]">
+              <div className="flex flex-col py-5">
                 <div className="flex flex-col gap-3 py-7 border-b-2 ">
-                  <h1 className="text-2xl font-bold tracking-wide">
+                  <h1 className="font-bold tracking-wide text-lg md:text-xl  xl:text-2xl">
                     Explore in {place.city}, {place.country}
                   </h1>
-                  <p className="text-xl tracking-wide leading-8">
+                  <p className=" tracking-wide leading-8  md:text-lg xl:text-xl ">
                     {place.description}
                   </p>
                 </div>
                 <div className="flex flex-col gap-3 py-7 border-b-2">
-                  <h1 className=" text-2xl font-bold tracking-wide">
+                  <h1 className="  font-bold tracking-wide text-lg md:text-xl  xl:text-2xl">
                     The Place offers
                   </h1>
-                  <p className="flex flex-row  gap-1 items-center md:text-md  text-xl tracking-wide  leading-8">
-                    <div className="flex items-center">
-                      <span>{place.maxGuests} guests</span>
-                      <LuDot className="text-2xl" />
-                    </div>
-                    <div className="flex items-center">
-                      <span>{place.bedrooms} bedrooms</span>
-                      <LuDot className="text-2xl" />{" "}
-                    </div>
-                    <div className="flex items-center">
-                      <span>{place.beds} beds</span>
-                      <LuDot className="text-2xl" />
-                    </div>
+                  <p className="flex flex-row  gap-1 items-center  tracking-wide md:text-xl lg:text-lg xl:text-xl">
+                    <span className="flex items-center">
+                      {place.maxGuests} guests <LuDot className=" text-2xl" />
+                    </span>
+                    <span className="flex items-center">
+                      {place.bedrooms} bedrooms <LuDot className=" text-2xl" />
+                    </span>
+                    <span className="flex items-center">
+                      {place.beds} beds <LuDot className=" text-2xl" />
+                    </span>
                     <span>{place.bathrooms} bathrooms</span>
                   </p>
-                  <div className="grid grid-cols-3 items-center gap-8 pt-5 pb-3">
+                  <div className="grid md:grid-cols-2 xl:grid-cols-3 items-center gap-8 pt-5 pb-3 md:text-xl  xl:text-2xl">
                     {place.amenities.map((each) => {
                       if (each == "wifi") {
                         return (
-                          <div className="flex flex-row gap-3">
+                          <div className="flex flex-row items-center gap-3">
                             <FaWifi className="text-2xl" />
-                            <p className="text-xl">Wifi</p>
+                            <p className="md:text-lg lg:text-xl">Wifi</p>
                           </div>
                         );
                       }
                       if (each == "free-parking") {
                         return (
-                          <div className="flex flex-row gap-3">
+                          <div className="flex flex-row items-center gap-3">
                             <FaCarSide className="text-2xl" />
-                            <p className="text-xl">Free Parking</p>
+                            <p className="md:text-lg lg:text-xl">
+                              Free Parking
+                            </p>
                           </div>
                         );
                       }
                       if (each == "garden-view") {
                         return (
-                          <div className="flex flex-row gap-3">
+                          <div className="flex flex-row items-center gap-3">
                             <TbTrees className="text-2xl" />
-                            <p className="text-xl">Garden View</p>
+                            <p className="md:text-lg lg:text-xl">Garden View</p>
                           </div>
                         );
                       }
                       if (each == "pool-facility") {
                         return (
-                          <div className="flex flex-row gap-3">
+                          <div className="flex flex-row  items-center gap-3">
                             <MdPool className="text-2xl" />
-                            <p className="text-xl">Pool Available</p>
+                            <p className="md:text-lg lg:text-xl">
+                              Pool Available
+                            </p>
                           </div>
                         );
                       }
                       if (each == "tv") {
                         return (
-                          <div className="flex flex-row gap-3">
+                          <div className="flex flex-row items-center gap-3">
                             <PiTelevisionBold className="text-2xl" />
-                            <p className="text-xl">TV</p>
+                            <p className="md:text-lg lg:text-xl">TV</p>
                           </div>
                         );
                       }
                     })}
                   </div>
+                  <div className="flex gap-5 pt-5 font-semibold text-base md:font-bold md:text-xl tracking-wide">
+                    <p>
+                      Check In:{" "}
+                      <span className="font-medium">
+                        {place.checkIn}
+                        {place.checkIn >= "12:00" ? " PM" : " AM"}
+                      </span>
+                    </p>
+                    <p>
+                      Check Out:{" "}
+                      <span className="font-medium">
+                        {place.checkOut}
+                        {place.checkIn >= "12:00" ? " PM" : " AM"}
+                      </span>
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-3 py-7 border-b-2">
-                  <h1 className=" text-2xl font-bold tracking-wide">
+                <div className="flex w-fit flex-col gap-3 py-7 border-b-2">
+                  <h1 className=" font-bold tracking-wide text-lg md:text-xl  xl:text-2xl">
                     Other stuffs to note
                   </h1>
-                  <p className="text-xl tracking-wide leading-8">
+                  <p className="tracking-wide leading-8 md:text-lg xl:text-xl">
                     {place.extraInfo}
                   </p>
                 </div>
               </div>
-              <div className=" flex h-fit items-start justify-center  p-10">
+              <div className=" flex  w-min items-start justify-center lg:sticky lg:top-24 py-5 md:pt-10 md:pb-2 md:px-4 lg:px-2 xl:p-10">
                 <form
                   action=""
-                  className="sticky flex flex-col  justify-start border-2  px-10 py-8 gap-6 rounded-2xl shadow-xl"
+                  className="flex flex-col justify-start border-2 px-3 py-4 md:px-10 md:py-4 lg:px-5 lg:py-8 gap-6 rounded-2xl shadow-xl"
                 >
                   <h1 className="text-2xl font-bold tracking-wider">
                     {place.price}/night
                   </h1>
-                  <div className=" flex flex-col border-2 border-primary pr-5 rounded-2xl">
+                  <div className=" flex flex-col border-2 border-primary rounded-2xl">
                     <div className="flex border-b-2 border-primary  ">
-                      <div className=" border-r-2 border-primary p-3">
-                        <label className="flex flex-col tracking-wide gap-2 p-2 px-6 font-semibold cursor-pointer">
+                      <div className=" border-r-2 border-primary p-5 md:pl-6 md:pr-24 lg:p-5">
+                        <label className="flex flex-col tracking-wide gap-2 font-semibold cursor-pointer">
                           Check-In
                           <input type="date" className="font-medium " />
                         </label>
                       </div>
-                      <div className="p-3">
-                        <label className="flex flex-col tracking-wide gap-2 p-2 px-6 font-semibold cursor-pointer">
+                      <div className="p-5 md:pl-6 md:pr-24 lg:p-5">
+                        <label className="flex flex-col tracking-wide gap-2 font-semibold cursor-pointer">
                           Check-Out
                           <input type="date" className="font-medium " />
                         </label>
                       </div>
                     </div>
-                    <div className="p-3">
-                      <label className="flex flex-col tracking-wide gap-2 py-4  px-6 font-semibold cursor-pointer">
+                    <div className="p-5">
+                      <label className="flex flex-col tracking-wide gap-2  font-semibold cursor-pointer">
                         No of Guests
                         <input
                           type="number"
