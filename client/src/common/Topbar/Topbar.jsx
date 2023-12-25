@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../../components/UserContext";
 import { LuLogOut } from "react-icons/lu";
 import { Toastify } from "../toastify/Toastify";
@@ -10,8 +10,8 @@ function Topbar() {
   const { user, setUser } = useContext(UserContext);
 
   if (redirect) {
-    // location.reload();
     setUser(null);
+    location.reload();
     setRedirect(false);
     // return <Navigate to="/" />;
   }
@@ -25,7 +25,7 @@ function Topbar() {
   };
 
   return (
-    <div className="sticky z-50 top-0 bg-white">
+    <div className="sticky z-10 top-0 bg-white">
       <header className="py-6 flex justify-around gap-4 px-4">
         <a href="/" className="flex items-center gap-2">
           {/* <svg

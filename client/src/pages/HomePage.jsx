@@ -36,7 +36,7 @@ function Homepage() {
                           {acc.city}, {acc.country}
                         </h2>
                       </div>
-                      <h2 className="font-semibold">{acc.price}</h2>
+                      <h2 className="font-semibold">&#8377;{acc.price}</h2>
                     </div>
                   </Link>
                 )}

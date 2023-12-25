@@ -60,7 +60,7 @@ export default function PhotoContainer({
           type="text"
           value={photoLink}
           onChange={(e) => setPhotoLink(e.target.value)}
-          placeholder="Enter the URL"
+          placeholder="Enter the URL (Atleast 5 Photos)"
           className="w-full  p-2 rounded-xl font-medium tracking-wider focus:outline-none"
         />
         <button>

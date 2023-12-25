@@ -160,10 +160,10 @@ export default function AccommodationInfoContainer({
       <h2 className="text-md tracking-wider font-semibold">Pricings</h2>
       <div className="grid grid-cols-3 gap-3">
         <input
-          type="text"
+          type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          placeholder="Price per night ($150)"
+          placeholder="Price per night (1500)"
           className="w-full flex flex-row items-center rounded-lg gap-4 border-2 p-4 cursor-pointer focus:outline-none hover:border-primary focus:border-primary"
         />
       </div>
