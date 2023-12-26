@@ -30,6 +30,10 @@ const router = createBrowserRouter(
         element={<UserAccommodationPage />}
       />
       <Route
+        path="/account/:subpage/:action/:id/:crud"
+        element={<UserAccommodationPage />}
+      />
+      <Route
         path="/account/bookings/:action/:id"
         element={<UserBookingPage />}
       />

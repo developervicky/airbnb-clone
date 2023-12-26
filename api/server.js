@@ -403,5 +403,8 @@ app.get("/bookings/:id", async (req, res) => {
     res.json(error);
   }
 });
-
+app.delete("/acc/:id", async (req, res) => {
+  const { id } = req.params;
+  res.json(await Place.findByIdAndDelete(id));
+});
 app.listen(5000);

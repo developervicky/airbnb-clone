@@ -44,10 +44,10 @@ function BookingPage() {
                 </h1>
                 <p className="tracking-wide ">
                   <span className="font-semibold ">Name: </span>
-                  <span >{booking.fullName}</span>
+                  <span>{booking.fullName}</span>
                 </p>
                 <p className="flex gap-2 tracking-wide  items-center">
-                  <FaRegCalendarAlt  />
+                  <FaRegCalendarAlt />
                   {format(new Date(booking.checkinDate), "dd-MM-yyyy")}
                   <FaLongArrowAltRight />
                   {format(new Date(booking.checkoutDate), "dd-MM-yyyy")}
@@ -82,7 +82,7 @@ function BookingPage() {
                 className="flex flex-col  gap-2 border-2 border-primary p-3 text-gray-600 rounded-xl cursor-pointer shadow-lg shadow-gray-300 hover:bg-primary hover:text-white"
               >
                 <h1 className="font-semibold tracking-wide truncate">
-                  {booking.place.title}
+                  {booking.place?.title}
                 </h1>
                 <p className="tracking-wide">
                   <span className="font-semibold ">Name: </span>

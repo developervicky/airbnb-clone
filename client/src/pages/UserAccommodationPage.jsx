@@ -27,8 +27,6 @@ function UserAccommodationPage() {
     }
   }, [id]);
 
-  console.log(action);
-
   if (showPhotos) {
     return (
       <>

@@ -5,10 +5,10 @@ export default function AccPhotos({ place, setShowPhotos }) {
     let style =
       "absolute flex gap-3 items-center  bg-gray-300 bg-opacity-75 p-4 rounded-xl  hover:bg-primary hover:bg-opacity-75 hover:text-white";
     if (styles >= 3) {
-      console.log(style + " bottom-4 right-4");
+      // console.log(style + " bottom-4 right-4");
       return style + " bottom-4 right-4";
     } else {
-      console.log(style + " bottom-4 right-16");
+      // console.log(style + " bottom-4 right-16");
       return style + " bottom-4 right-16";
     }
   };
