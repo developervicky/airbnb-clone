@@ -24,6 +24,15 @@ export default function UserBookingPage() {
     });
   }, [id]);
 
+  let numberOfNights = 0;
+
+  if (bookingData.checkinDate && bookingData.checkoutDate) {
+    numberOfNights = differenceInCalendarDays(
+      new Date(bookingData.checkoutDate),
+      new Date(bookingData.checkinDate)
+    );
+  }
+
   if (showPhotos) {
     return (
       <>
@@ -70,11 +79,7 @@ export default function UserBookingPage() {
               </p>
               <p className="flex text-base md:text-xl gap-2 items-center ">
                 <MdNightsStay className="text-primary" />
-                {differenceInCalendarDays(
-                  new Date(bookingData.checkoutDate),
-                  new Date(bookingData.checkinDate)
-                )}{" "}
-                Nights
+                {numberOfNights} Nights
               </p>
             </div>
           </div>
@@ -119,6 +124,10 @@ export default function UserBookingPage() {
                 <span>
                   {bookingData.noRooms}{" "}
                   {bookingData.noRooms > 1 ? "Rooms" : "Room"}
+                </span>
+                <span>&#10006;</span>
+                <span>
+                  {numberOfNights} {numberOfNights > 1 ? "Nights" : "Night"}
                 </span>
                 <span>&#10006;</span>
                 <span>&#8377;{bookingData.place?.price}/room</span>

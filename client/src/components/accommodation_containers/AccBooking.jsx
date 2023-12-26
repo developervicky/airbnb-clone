@@ -94,6 +94,7 @@ export default function AccBooking({ place }) {
                 <input
                   type="number"
                   value={noGuests}
+                  min="1"
                   onChange={(e) => {
                     setNoGuests(e.target.value);
                   }}
@@ -105,6 +106,7 @@ export default function AccBooking({ place }) {
                 <input
                   type="number"
                   value={noRooms}
+                  min="1"
                   onChange={(e) => {
                     setNoRooms(e.target.value);
                   }}

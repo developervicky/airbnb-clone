@@ -51,7 +51,7 @@ function UserAccommodationPage() {
   }
   return (
     <>
-      {id == place._id ? (
+      {id == place?._id ? (
         <div className=" flex flex-col grow ">
           <div className="flex flex-col gap-2 py-8  mx-auto w-11/12 md:w-11/12 lg:w-10/12 xl:w-9/12  ">
             <AccTitle place={place} />

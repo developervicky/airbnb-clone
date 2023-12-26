@@ -8,14 +8,14 @@ import AccDelModal from "../accommodation_modal/AccDelModal";
 
 export default function AccTitle({ place }) {
   const { user } = useContext(UserContext);
-  const { id, crud } = useParams();
+  const { id, crud, subpage } = useParams();
 
   return (
     <>
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-medium tracking-wide">{place.title}</h2>
         {!user ||
-          (user._id == place.ownerId && (
+          (user._id == place.ownerId && subpage == "accommodations" && (
             <div className="flex gap-6">
               <Link
                 to={"del"}
