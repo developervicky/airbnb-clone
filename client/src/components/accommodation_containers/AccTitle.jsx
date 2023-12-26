@@ -7,10 +7,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import AccDelModal from "../accommodation_modal/AccDelModal";
 
 export default function AccTitle({ place }) {
-
   const { user } = useContext(UserContext);
   const { id, crud } = useParams();
-
 
   return (
     <>
@@ -21,7 +19,7 @@ export default function AccTitle({ place }) {
             <div className="flex gap-6">
               <Link
                 to={"del"}
-                className="border-2 border-primary flex items-center text-primary p-2 rounded-full hover:text-white hover:bg-primary"
+                className="border-2 border-primary flex items-center text-primary p-2 rounded-full hover:text-white hover:bg-caution hover:border-caution"
               >
                 <MdDeleteOutline className="text-2xl " />
               </Link>

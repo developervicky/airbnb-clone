@@ -154,7 +154,7 @@ export default function AccBooking({ place }) {
             onClick={
               user ? () => bookAcc() : () => Toastify("fail", "Login to Book")
             }
-            className="border-2 p-4 font-bold tracking-wide rounded-2xl bg-primary text-white"
+            className="border-2 p-4 font-bold tracking-wide rounded-2xl bg-primary text-white hover:bg-primaryl"
           >
             Book your Room {numberOfNights > 0 && <span>(&#8377;{price})</span>}
           </button>
