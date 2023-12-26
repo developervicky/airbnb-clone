@@ -10,6 +10,7 @@ const bookingSchema = new Schema({
   fullName: { type: String, required: true },
   email: { type: String, required: true },
   noGuests: { type: Number, required: true },
+  noRooms: { type: Number, required: true },
   phone: { type: String, required: true },
   price: Number,
 });

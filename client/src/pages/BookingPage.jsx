@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../components/UserContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { format, differenceInCalendarDays } from "date-fns";
 import { FaLongArrowAltRight, FaRegCalendarAlt } from "react-icons/fa";
+import { FaCreditCard } from "react-icons/fa6";
 import { MdNightsStay } from "react-icons/md";
-import { IoPricetagsOutline } from "react-icons/io5";
 
 function BookingPage() {
   const [bookings, setBookings] = useState([]);
@@ -25,9 +25,7 @@ function BookingPage() {
     });
   }, [subpage]);
 
-  let numberOfNights = 0;
-
-  console.log(bookings);
+  // console.log(bookings);
 
   return (
     <div className="flex grid sm:grid-cols-1 md:grid-cols-2 gap-8 grow">
@@ -36,16 +34,20 @@ function BookingPage() {
         <div className="grid sm:grid-cols-1 xl:grid-cols-2 gap-5 py-5">
           {bookings?.length > 0 &&
             bookings.map((booking) => (
-              <div className="flex flex-col  gap-2 border-2 border-primary p-3 rounded-xl cursor-pointer hover:bg-primary hover:text-white">
+              <Link
+                key={booking._id}
+                to={`user/${booking._id}`}
+                className="flex flex-col  gap-2 border-2 border-primary p-3 rounded-xl text-gray-600 cursor-pointer shadow-lg shadow-gray-300 hover:bg-primary hover:text-white"
+              >
                 <h1 className="font-semibold tracking-wide truncate">
                   {booking.place.title}
                 </h1>
-                <p className="tracking-wide">
+                <p className="tracking-wide ">
                   <span className="font-semibold ">Name: </span>
-                  {booking.fullName}
+                  <span >{booking.fullName}</span>
                 </p>
                 <p className="flex gap-2 tracking-wide  items-center">
-                  <FaRegCalendarAlt />
+                  <FaRegCalendarAlt  />
                   {format(new Date(booking.checkinDate), "dd-MM-yyyy")}
                   <FaLongArrowAltRight />
                   {format(new Date(booking.checkoutDate), "dd-MM-yyyy")}
@@ -59,10 +61,10 @@ function BookingPage() {
                   Nights
                 </p>
                 <div className="flex gap-2 tracking-wide items-center">
-                  <IoPricetagsOutline />
+                  <FaCreditCard />
                   <p className="tracking-wide">&#8377;{booking.price}</p>
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       </div>
@@ -74,7 +76,11 @@ function BookingPage() {
         <div className="grid sm:grid-cols-1 xl:grid-cols-2 gap-5 py-5">
           {accBookings?.length > 0 &&
             accBookings.map((booking) => (
-              <div className="flex flex-col  gap-2 border-2 border-primary p-3 rounded-xl cursor-pointer hover:bg-primary hover:text-white">
+              <Link
+                key={booking._id}
+                to={`admin/${booking._id}`}
+                className="flex flex-col  gap-2 border-2 border-primary p-3 text-gray-600 rounded-xl cursor-pointer shadow-lg shadow-gray-300 hover:bg-primary hover:text-white"
+              >
                 <h1 className="font-semibold tracking-wide truncate">
                   {booking.place.title}
                 </h1>
@@ -97,10 +103,10 @@ function BookingPage() {
                   Nights
                 </p>
                 <div className="flex gap-2 tracking-wide items-center">
-                  <IoPricetagsOutline />
+                  <FaCreditCard />
                   <p className="tracking-wide">&#8377;{booking.price}</p>
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       </div>

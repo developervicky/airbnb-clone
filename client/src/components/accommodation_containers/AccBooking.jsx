@@ -10,6 +10,7 @@ export default function AccBooking({ place }) {
   const [checkinDate, setCheckInDate] = useState();
   const [checkoutDate, setCheckOutDate] = useState();
   const [noGuests, setNoGuests] = useState(1);
+  const [noRooms, setNoRooms] = useState(1);
   const [fullName, setFullName] = useState(
     user ? user.fname + " " + user.lname : ""
   );
@@ -25,7 +26,7 @@ export default function AccBooking({ place }) {
     );
   }
 
-  let price = numberOfNights * place.price * noGuests;
+  let price = numberOfNights * place.price * noRooms;
 
   const bookAcc = async () => {
     try {
@@ -33,6 +34,7 @@ export default function AccBooking({ place }) {
         checkinDate,
         checkoutDate,
         noGuests,
+        noRooms,
         fullName,
         email,
         phone,
@@ -41,9 +43,8 @@ export default function AccBooking({ place }) {
         price: price,
       });
       const bookingId = response.data._id;
-      setRedirect(`/account/bookings/${bookingId}`);
+      setRedirect(`/account/bookings`);
     } catch (error) {
-      
       return error;
     }
   };
@@ -55,7 +56,7 @@ export default function AccBooking({ place }) {
     <>
       <div className=" flex  w-min items-start justify-center lg:sticky lg:top-24 py-5 md:pt-10 md:pb-2 md:px-4 lg:px-2 xl:p-10">
         <div className="flex flex-col justify-start border-2 px-3 py-4 md:px-10 md:py-4 lg:px-5 lg:py-8 gap-6 rounded-2xl shadow-xl">
-          <h1 className="text-2xl font-bold tracking-wider">
+          <h1 className="text-2xl text-primary font-bold tracking-wider ">
             &#8377;{place.price}/night
           </h1>
           <div className=" flex flex-col border-2 border-primary rounded-2xl">
@@ -87,7 +88,7 @@ export default function AccBooking({ place }) {
                 </label>
               </div>
             </div>
-            <div className="p-5">
+            <div className="flex flex-col gap-3 p-5">
               <label className="flex flex-col tracking-wide gap-2  font-semibold cursor-pointer">
                 No of Guests
                 <input
@@ -95,6 +96,17 @@ export default function AccBooking({ place }) {
                   value={noGuests}
                   onChange={(e) => {
                     setNoGuests(e.target.value);
+                  }}
+                  className="font-medium border-2 rounded-2xl p-2 outline-none hover:border-primary focus:border-primary  "
+                />
+              </label>
+              <label className="flex flex-col tracking-wide gap-2  font-semibold cursor-pointer">
+                No of Rooms
+                <input
+                  type="number"
+                  value={noRooms}
+                  onChange={(e) => {
+                    setNoRooms(e.target.value);
                   }}
                   className="font-medium border-2 rounded-2xl p-2 outline-none hover:border-primary focus:border-primary  "
                 />

@@ -353,6 +353,7 @@ app.post("/bookings", async (req, res) => {
     checkinDate,
     checkoutDate,
     noGuests,
+    noRooms,
     fullName,
     email,
     phone,
@@ -364,6 +365,7 @@ app.post("/bookings", async (req, res) => {
     checkinDate,
     checkoutDate,
     noGuests,
+    noRooms,
     fullName,
     email,
     phone,
@@ -392,6 +394,14 @@ app.get("/bookings", async (req, res) => {
 app.get("/accbookings", async (req, res) => {
   const userData = await getUserDatafromToken(req);
   res.json(await Booking.find({ ownerId: userData.id }).populate("place"));
+});
+app.get("/bookings/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.json(await Booking.findById(id).populate("place"));
+  } catch (error) {
+    res.json(error);
+  }
 });
 
 app.listen(5000);

@@ -27,6 +27,8 @@ function UserAccommodationPage() {
     }
   }, [id]);
 
+  console.log(action);
+
   if (showPhotos) {
     return (
       <>
@@ -63,7 +65,7 @@ function UserAccommodationPage() {
                 <AccInfo place={place} />
                 <AccExtraInfo place={place} />
               </div>
-              <AccBooking place={place}/>
+              <AccBooking place={place} />
             </div>
           </div>
           {action == "useredit" && id == place._id && <AccommodationModal />}
