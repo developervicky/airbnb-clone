@@ -27,7 +27,6 @@ function UserAccommodationPage() {
     } catch (error) {
       console.log(error);
     }
-
   }, [id]);
 
   if (showPhotos) {
@@ -42,7 +41,7 @@ function UserAccommodationPage() {
               <IoCloseCircle className="text-4xl text-primary " />
             </button>
             {place?.photos?.length > 0 &&
-              place.photos.map((photo) => (
+              place?.photos.map((photo) => (
                 <div>
                   <Image src={photo} alt="" />
                 </div>
@@ -69,7 +68,7 @@ function UserAccommodationPage() {
               <AccBooking place={place} />
             </div>
           </div>
-          {action == "useredit" && id == place._id && <AccommodationModal />}
+          {action == "useredit" && id == place?._id && <AccommodationModal />}
         </div>
       ) : (
         <LoadingPage />

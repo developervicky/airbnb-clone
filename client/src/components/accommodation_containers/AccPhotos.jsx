@@ -17,26 +17,26 @@ export default function AccPhotos({ place, setShowPhotos }) {
     <>
       {" "}
       <div className=" relative pt-4 sm:pt-7">
-        {place.photos[0] && place.photos.length >= 3 ? (
+        {place?.photos[0] && place?.photos.length >= 3 ? (
           <div
             onClick={() => setShowPhotos(true)}
             className=" cursor-pointer grid grid-cols-[2fr_1fr] gap-2 overflow-hidden rounded-3xl "
           >
             <div>
               <Image
-                src={place.photos[0]}
+                src={place?.photos[0]}
                 alt="plcImg"
                 className="aspect-square object-cover"
               />
             </div>
             <div className="grid ">
               <Image
-                src={place.photos[1]}
+                src={place?.photos[1]}
                 alt="plcImg"
                 className="aspect-square object-cover"
               />
               <Image
-                src={place.photos[2]}
+                src={place?.photos[2]}
                 alt="plcImg"
                 className="aspect-square object-cover relative top-2"
               />
@@ -46,7 +46,7 @@ export default function AccPhotos({ place, setShowPhotos }) {
           <div className=" rounded-3xl  border-2 w-fit mx-auto  overflow-hidden ">
             <div>
               <Image
-                src={place.photos[0]}
+                src={place?.photos[0]}
                 alt="plcImg"
                 className="object-cover"
               />
@@ -55,7 +55,7 @@ export default function AccPhotos({ place, setShowPhotos }) {
         )}
         <button
           onClick={() => setShowPhotos(true)}
-          className={seeMoreStyle(place.photos.length)}
+          className={seeMoreStyle(place?.photos.length)}
         >
           <MdOutlinePhotoLibrary className="sm:text-xl" />
           <p className="text-sm sm:text-base">See more</p>

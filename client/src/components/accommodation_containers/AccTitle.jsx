@@ -13,9 +13,11 @@ export default function AccTitle({ place }) {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h2 className=" sm:text-xl md:text-3xl font-bold md:font-medium tracking-wide">{place.title}</h2>
+        <h2 className=" sm:text-xl md:text-3xl font-bold md:font-medium tracking-wide">
+          {place?.title}
+        </h2>
         {!user ||
-          (user._id == place.ownerId && subpage == "accommodations" && (
+          (user._id == place?.ownerId && subpage == "accommodations" && (
             <div className="flex gap-2 md:gap-6">
               <Link
                 to={"del"}
@@ -37,10 +39,12 @@ export default function AccTitle({ place }) {
         <a
           target="_blank"
           rel="noreferrer"
-          href={"https://map.google.com/?q=" + place.city + "/" + place.country}
+          href={
+            "https://map.google.com/?q=" + place?.city + "/" + place?.country
+          }
           className="underline text-primary  "
         >
-          {place.city}, {place.country}
+          {place?.city}, {place?.country}
         </a>
       </div>
       {crud == "del" && <AccDelModal />}

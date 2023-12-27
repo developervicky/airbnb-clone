@@ -12,6 +12,7 @@ export default function AccDelModal() {
     try {
       await axios.delete(`/api/acc/${id}`).then(({ data }) => {
         console.log(data);
+        
       });
       setRedirect(true);
     } catch (error) {

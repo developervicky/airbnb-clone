@@ -58,6 +58,7 @@ export default function AccommodationModal() {
       } else {
         await axios.post("/api/accommodation", accInfo);
         navigate("/account/accommodations");
+        window.location.reload();
       }
     } catch (error) {
       Toastify("fail", "Fill the form");

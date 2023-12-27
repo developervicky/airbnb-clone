@@ -8,6 +8,7 @@ export default {
         primary: "#17A191",
         primaryl: "#29C0AE",
         caution: "#DC2626",
+        cautionl: "#E34E4E",
       },
     },
     screens: {

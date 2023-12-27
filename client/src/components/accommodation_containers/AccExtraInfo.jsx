@@ -6,7 +6,7 @@ export default function AccExtraInfo({ place }) {
           Other stuffs to note
         </h1>
         <p className="tracking-wide leading-8 text-gray-600 md:text-lg xl:text-xl">
-          {place.extraInfo}
+          {place?.extraInfo}
         </p>
       </div>
     </>

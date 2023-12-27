@@ -1,12 +1,12 @@
-import { FaCarSide, FaWifi } from "react-icons/fa";
+import { FaCarSide, FaCity, FaWifi } from "react-icons/fa";
 import { TbTrees } from "react-icons/tb";
 import { PiTelevisionBold } from "react-icons/pi";
-import { MdPool } from "react-icons/md";
+import { MdOutlinePets, MdPool } from "react-icons/md";
 
 export default function AccAmenities({ place }) {
   return (
     <div className="grid grid-cols-2 xl:grid-cols-3 md:items-center text-gray-600 gap-8 pt-5 pb-3 tracking-wide md:text-xl  xl:text-2xl">
-      {place.amenities.map((each) => {
+      {place?.amenities.map((each) => {
         if (each == "wifi") {
           return (
             <div className="flex flex-row items-center gap-3">
@@ -44,6 +44,22 @@ export default function AccAmenities({ place }) {
             <div className="flex flex-row items-center gap-3">
               <PiTelevisionBold className="text-2xl text-primary" />
               <p className="md:text-lg lg:text-xl">TV</p>
+            </div>
+          );
+        }
+        if (each == "city-view") {
+          return (
+            <div className="flex flex-row items-center gap-3">
+              <FaCity className="text-2xl text-primary" />
+              <p className="md:text-lg lg:text-xl">City view</p>
+            </div>
+          );
+        }
+        if (each == "pets-allowed") {
+          return (
+            <div className="flex flex-row items-center gap-3">
+              <MdOutlinePets className="text-2xl text-primary" />
+              <p className="md:text-lg lg:text-xl">Pets allowed</p>
             </div>
           );
         }
