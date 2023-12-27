@@ -13,7 +13,7 @@ export default function AccTitle({ place }) {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h2 className="text-xl md:text-3xl font-bold md:font-medium tracking-wide">{place.title}</h2>
+        <h2 className=" sm:text-xl md:text-3xl font-bold md:font-medium tracking-wide">{place.title}</h2>
         {!user ||
           (user._id == place.ownerId && subpage == "accommodations" && (
             <div className="flex gap-2 md:gap-6">
@@ -25,14 +25,14 @@ export default function AccTitle({ place }) {
               </Link>
               <Link
                 to={`/account/accommodations/useredit/${id}`}
-                className="text-xl md:text-3xl border-2 border-black p-2 rounded-full text-primary border-primary hover:text-white hover:bg-primary hover:border-white"
+                className="sm:text-xl md:text-3xl border-2 border-black p-2 rounded-full text-primary border-primary hover:text-white hover:bg-primary hover:border-white"
               >
                 <TbUserEdit className="" />
               </Link>
             </div>
           ))}
       </div>
-      <div className="flex gap-2 items-center w-fit  tracking-wide">
+      <div className="text-xs sm:text-sm md:text-base flex gap-2 items-center w-fit  tracking-wide">
         <GrMapLocation className="text-primary" />
         <a
           target="_blank"

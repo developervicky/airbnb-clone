@@ -26,7 +26,7 @@ function Topbar() {
 
   return (
     <div className="sticky z-10 top-0 bg-white ">
-      <header className="py-6 flex justify-between mx-auto gap-4 px-4 w-11/12 md:w-11/12 lg:w-10/12 xl:w-9/12">
+      <header className="py-3 md:py-6 flex justify-between mx-auto gap-4 px-4 w-11/12 md:w-11/12 lg:w-10/12 xl:w-9/12">
         <a href="/" className="flex items-center gap-2 ">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ function Topbar() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-8 h-8 text-primary"
+            className="w-6 w-6 sm:w-7 sm:w-7 md:w-8 md:h-8 text-primary"
           >
             <path
               strokeLinecap="round"
@@ -57,7 +57,7 @@ function Topbar() {
             />
           </svg>
 
-          <span className="text-2xl font-medium text-2xl text-primary tracking-wider">
+          <span className="text-base sm:text-xl md:text-2xl font-medium  text-primary tracking-wider">
             trip<span className="font-bold">R</span>over
           </span>
         </a>
@@ -88,14 +88,14 @@ function Topbar() {
         <div className="flex flex-row gap-2 ">
           <Link
             to={user ? "/account" : "/signin"}
-            className="flex border-2 border-gray-200  rounded-full py-2 px-4  gap-2 font-medium items-center shadow-md shadow-gray-200  hover:border-primary"
+            className="flex border-2 border-gray-200  rounded-full py-1 px-2 sm:py-2 sm:px-3 md:py-3 md:px-4 gap-1 md:gap-2 font-medium items-center shadow-md shadow-gray-200  hover:border-primary"
           >
             <div className=" ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="#707170"
-                className="w-9 h-9"
+                className="w-5 h-5 md:w-9 md:h-9"
               >
                 <path
                   fillRule="evenodd"
@@ -105,11 +105,11 @@ function Topbar() {
               </svg>
             </div>
             {user ? (
-              <div className="text-lg font-semibold text-gray-500 tracking-wider">
+              <div className="text-base md:text-lg font-semibold text-gray-500 tracking-wider">
                 {windowSize[0] > 425 ? user.fname : user.fname.split("")[0]}
               </div>
             ) : (
-              <div className="font-semibold text-gray-500 tracking-wider ">
+              <div className="text-base md:text-lg font-semibold text-gray-500 tracking-wider ">
                 Login
               </div>
             )}

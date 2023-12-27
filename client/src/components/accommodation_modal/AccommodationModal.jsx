@@ -69,7 +69,7 @@ export default function AccommodationModal() {
     if (!id) {
       return;
     }
-    axios.get(`/user/${id}`).then((res) => {
+    axios.get(`/api/user/${id}`).then((res) => {
       const { data } = res;
       setTitle(data.title);
       setAddress(data.address);

@@ -55,13 +55,13 @@ export default function AccBooking({ place }) {
   return (
     <>
       <div className=" flex  w-min items-start justify-center lg:sticky lg:top-24 py-5 md:pt-10 md:pb-2 md:px-4 lg:px-2 xl:p-10">
-        <div className="flex flex-col justify-start border-2 px-3 py-4 md:px-10 md:py-4 lg:px-5 lg:py-8 gap-6 rounded-2xl shadow-xl">
+        <div className="flex flex-col justify-start border-2 p-3 sm:px-3 sm:py-4 md:px-10 md:py-4 lg:px-5 lg:py-8 gap-4 sm:gap-6 rounded-2xl shadow-xl">
           <h1 className="text-2xl text-primary font-bold tracking-wider ">
             &#8377;{place.price}/night
           </h1>
           <div className=" flex flex-col border-2 border-primary rounded-2xl">
             <div className="flex border-b-2 border-primary  ">
-              <div className=" border-r-2 border-primary p-5 md:pl-6 md:pr-24 lg:p-5">
+              <div className=" border-r-2 border-primary p-3 text-sm sm:text-base sm:p-5 md:pl-6 md:pr-24 lg:p-5">
                 <label className="flex flex-col tracking-wide gap-2 font-semibold cursor-pointer">
                   Check-In
                   <input
@@ -74,7 +74,7 @@ export default function AccBooking({ place }) {
                   />
                 </label>
               </div>
-              <div className="p-5 md:pl-6 md:pr-24 lg:p-5">
+              <div className=" p-3 text-sm sm:text-base sm:p-5 md:pl-6 md:pr-24 lg:p-5">
                 <label className="flex flex-col tracking-wide gap-2 font-semibold cursor-pointer">
                   Check-Out
                   <input
@@ -88,7 +88,7 @@ export default function AccBooking({ place }) {
                 </label>
               </div>
             </div>
-            <div className="flex flex-col gap-3 p-5">
+            <div className="flex flex-col text-sm sm:text-base gap-3 p-3 sm:p-5">
               <label className="flex flex-col tracking-wide gap-2  font-semibold cursor-pointer">
                 No of Guests
                 <input
@@ -101,7 +101,7 @@ export default function AccBooking({ place }) {
                   className="font-medium border-2 rounded-2xl p-2 outline-none hover:border-primary focus:border-primary  "
                 />
               </label>
-              <label className="flex flex-col tracking-wide gap-2  font-semibold cursor-pointer">
+              <label className="flex flex-col  tracking-wide gap-2  font-semibold cursor-pointer">
                 No of Rooms
                 <input
                   type="number"
@@ -115,7 +115,7 @@ export default function AccBooking({ place }) {
               </label>
             </div>
             {user && numberOfNights > 0 && (
-              <div className="p-5 border-primary flex flex-col gap-4 border-t-2">
+              <div className="p-3 sm:p-5 text-sm sm:text-base border-primary flex flex-col gap-4 border-t-2">
                 <label className="flex flex-col tracking-wide gap-2  font-semibold cursor-pointer">
                   Full Name
                   <input

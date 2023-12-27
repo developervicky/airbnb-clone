@@ -39,7 +39,7 @@ export default function BasicInfoContainer({
         placeholder="Address"
         className="border-2 p-2 rounded-xl font-medium tracking-wider focus:outline-none"
       />
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid sm:grid-cols-3 gap-3">
         <input
           type="text"
           value={country}

@@ -16,7 +16,7 @@ export default function AccPhotos({ place, setShowPhotos }) {
   return (
     <>
       {" "}
-      <div className=" relative pt-7">
+      <div className=" relative pt-4 sm:pt-7">
         {place.photos[0] && place.photos.length >= 3 ? (
           <div
             onClick={() => setShowPhotos(true)}
@@ -57,8 +57,8 @@ export default function AccPhotos({ place, setShowPhotos }) {
           onClick={() => setShowPhotos(true)}
           className={seeMoreStyle(place.photos.length)}
         >
-          <MdOutlinePhotoLibrary className="text-xl" />
-          <p>See more</p>
+          <MdOutlinePhotoLibrary className="sm:text-xl" />
+          <p className="text-sm sm:text-base">See more</p>
         </button>
       </div>
     </>

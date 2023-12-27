@@ -16,6 +16,7 @@ import Image from "../common/Image";
 function UserAccommodationPage() {
   const [place, setplace] = useState([]);
   const [showPhotos, setShowPhotos] = useState(false);
+
   const { action, id } = useParams();
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function UserAccommodationPage() {
     } catch (error) {
       console.log(error);
     }
+
   }, [id]);
 
   if (showPhotos) {

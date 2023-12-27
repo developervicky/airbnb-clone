@@ -12,6 +12,7 @@ import { MdEmail, MdOutlinePhone } from "react-icons/md";
 import AccAmenities from "../components/accommodation_containers/AccAmenities";
 import { UserContext } from "../components/UserContext";
 import Image from "../common/Image";
+import LoadingPage from "./LoadingPage";
 
 export default function UserBookingPage() {
   const [bookingData, setBookingData] = useState([]);
@@ -62,7 +63,7 @@ export default function UserBookingPage() {
 
   return (
     <>
-      {id == bookingData._id && (
+      {id == bookingData._id ? (
         <div className="flex flex-col gap-2 py-8  mx-auto w-11/12 md:w-11/12 lg:w-10/12 xl:w-9/12  ">
           <AccTitle place={bookingData.place} />
           <AccPhotos place={bookingData.place} setShowPhotos={setShowPhotos} />
@@ -156,6 +157,8 @@ export default function UserBookingPage() {
             </div>
           </div>
         </div>
+      ) : (
+        <LoadingPage />
       )}
     </>
   );

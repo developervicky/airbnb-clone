@@ -36,7 +36,7 @@ export default function AccommodationInfoContainer({
         Accommodation Info
       </h2>
       <h2 className="text-md tracking-wider font-semibold">Amenities</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
         <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
           <input
             type="checkbox"
