@@ -109,10 +109,10 @@ app.post("/api/register", async (req, res) => {
       userId: userData._id,
       token: crypto.randomBytes(32).toString("hex"),
     }).save();
-    const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
+    const url = `${process.env.VITE_API_BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
     // console.log(userData.email, url);
     await sendEmail(userData.email, "Verify Email - tripRover", url, fullname);
-    return res.send({ message: "Verify the Email" });
+    res.send({ message: "Verify the Email" });
   } catch (e) {
     res.status(422);
   }
@@ -188,7 +188,7 @@ app.post("/api/signin", async (req, res) => {
               userId: userData._id,
               token: crypto.randomBytes(32).toString("hex"),
             }).save();
-            const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
+            const url = `${process.env.VITE_API_BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
             await sendEmail(
               userData.email,
               "Verify Email - tripRover",
