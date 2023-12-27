@@ -66,13 +66,13 @@ function getUserDatafromToken(req) {
   });
 }
 
-app.get("/test", (req, res) => {
+app.get("/api/test", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   console.log("hi");
   res.json("hello");
 });
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { fname, lname, email, password } = req.body;
 
@@ -118,7 +118,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/:id/verify/:token", async (req, res) => {
+app.get("/api/:id/verify/:token", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   try {
     const user = await User.findOne({ _id: req.params.id });
@@ -155,7 +155,7 @@ app.get("/:id/verify/:token", async (req, res) => {
   }
 });
 
-app.post("/signin", async (req, res) => {
+app.post("/api/signin", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { email, password } = req.body;
   try {
@@ -203,7 +203,7 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-app.get("/profile", (req, res) => {
+app.get("/api/profile", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
   if (token) {
@@ -220,13 +220,13 @@ app.get("/profile", (req, res) => {
   // res.json({ token });
 });
 
-app.post("/logout", (req, res) => {
+app.post("/api/logout", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   res.cookie("token", "").json("Succesful Logout");
 });
 
 // console.log(__dirname);
-app.post("/uploads_link", async (req, res) => {
+app.post("/api/uploads_link", async (req, res) => {
   const { photoLink: link } = req.body;
   const newName = "photo" + Date.now() + ".jpg";
   await download.image({
@@ -245,23 +245,27 @@ app.post("/uploads_link", async (req, res) => {
 
 // const photoMiddleware = multer({ dest: "uploads/" });
 const photoMiddleware = multer({ dest: "/tmp" });
-app.post("/uploads", photoMiddleware.array("photos", 100), async (req, res) => {
-  const uploadedFiles = [];
-  for (let i = 0; i < req.files.length; i++) {
-    // console.log(req.files[i]);
-    const { path, originalname, mimetype } = req.files[i];
-    const url = await uploadToS3(path, originalname, mimetype);
-    uploadedFiles.push(url);
-    // const parts = originalname.split(".");
-    // const ext = parts[parts.length - 1];
-    // const newPath = path + "." + ext;
-    // fs.renameSync(path, newPath); => local server function
-    // uploadedFiles.push(newPath.replace("uploads\\", ""));
+app.post(
+  "/api/uploads",
+  photoMiddleware.array("photos", 100),
+  async (req, res) => {
+    const uploadedFiles = [];
+    for (let i = 0; i < req.files.length; i++) {
+      // console.log(req.files[i]);
+      const { path, originalname, mimetype } = req.files[i];
+      const url = await uploadToS3(path, originalname, mimetype);
+      uploadedFiles.push(url);
+      // const parts = originalname.split(".");
+      // const ext = parts[parts.length - 1];
+      // const newPath = path + "." + ext;
+      // fs.renameSync(path, newPath); => local server function
+      // uploadedFiles.push(newPath.replace("uploads\\", ""));
+    }
+    res.json(uploadedFiles);
   }
-  res.json(uploadedFiles);
-});
+);
 
-app.post("/accommodation", async (req, res) => {
+app.post("/api/accommodation", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
   const {
@@ -310,7 +314,7 @@ app.post("/accommodation", async (req, res) => {
   }
 });
 
-app.put("/accommodation", (req, res) => {
+app.put("/api/accommodation", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
   const {
@@ -365,7 +369,7 @@ app.put("/accommodation", (req, res) => {
   }
 });
 
-app.get("/placeFind", (req, res) => {
+app.get("/api/placeFind", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
   if (token) {
@@ -377,7 +381,7 @@ app.get("/placeFind", (req, res) => {
   }
 });
 
-app.get("/user/:id", async (req, res) => {
+app.get("/api/user/:id", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   try {
     const { id } = req.params;
@@ -387,12 +391,12 @@ app.get("/user/:id", async (req, res) => {
   }
 });
 
-app.get("/home-place", async (req, res) => {
+app.get("/api/home-place", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   res.json(await Place.find());
 });
 
-app.post("/bookings", async (req, res) => {
+app.post("/api/bookings", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const userData = await getUserDatafromToken(req);
   const {
@@ -428,7 +432,7 @@ app.post("/bookings", async (req, res) => {
     });
 });
 
-app.get("/bookings", async (req, res) => {
+app.get("/api/bookings", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   try {
     const userData = await getUserDatafromToken(req);
@@ -438,13 +442,13 @@ app.get("/bookings", async (req, res) => {
   }
 });
 
-app.get("/accbookings", async (req, res) => {
+app.get("/api/accbookings", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const userData = await getUserDatafromToken(req);
   res.json(await Booking.find({ ownerId: userData.id }).populate("place"));
 });
 
-app.get("/bookings/:id", async (req, res) => {
+app.get("/api/bookings/:id", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   try {
     const { id } = req.params;
@@ -454,7 +458,7 @@ app.get("/bookings/:id", async (req, res) => {
   }
 });
 
-app.delete("/acc/:id", async (req, res) => {
+app.delete("/api/acc/:id", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { id } = req.params;
   res.json(await Place.findByIdAndDelete(id));
