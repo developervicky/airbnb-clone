@@ -6,7 +6,7 @@ import Image from "../common/Image";
 function Homepage() {
   const [accData, setAccData] = useState([]);
   useEffect(() => {
-    axios.get("/home-place").then((res) => {
+    axios.get("/api/home-place").then((res) => {
       setAccData(res.data);
     });
   }, []);

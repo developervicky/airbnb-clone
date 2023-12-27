@@ -17,10 +17,10 @@ function BookingPage() {
   const { subpage } = useParams();
 
   useEffect(() => {
-    axios.get("/bookings").then((res) => {
+    axios.get("/api/bookings").then((res) => {
       setBookings(res.data);
     });
-    axios.get("/accbookings").then((res) => {
+    axios.get("/api/accbookings").then((res) => {
       setAccBookings(res.data);
     });
   }, [subpage]);
