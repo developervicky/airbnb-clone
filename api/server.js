@@ -32,7 +32,7 @@ app.use(
   })
 );
 
-mongoose.connect(process.env.MONGO_URL);
+// mongoose.connect(process.env.MONGO_URL);
 
 async function uploadToS3(path, originalName, mimeType) {
   const client = new S3Client({
