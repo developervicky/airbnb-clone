@@ -11,8 +11,8 @@ function Homepage() {
   useEffect(() => {
     axios.get("/api/home-place").then((res) => {
       setAccData(res.data);
+      setLoading(false);
     });
-    setLoading(false);
   }, []);
   return (
     <>
