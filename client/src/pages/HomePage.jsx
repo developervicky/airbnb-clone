@@ -1,12 +1,15 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GoPlus } from "react-icons/go";
 import Image from "../common/Image";
 import LoadingPage from "./LoadingPage";
+import { UserContext } from "../components/UserContext";
 function Homepage() {
   const [accData, setAccData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { ready } = useContext(UserContext);
 
   useEffect(() => {
     axios.get("/api/home-place").then((res) => {
@@ -16,7 +19,9 @@ function Homepage() {
   }, []);
   return (
     <>
-      {!loading ? (
+      {loading && ready ? (
+        <LoadingPage />
+      ) : (
         <div className=" flex flex-col w-10/12 mx-auto grow justify-between  ">
           <div className="p-3 sm:p-0">
             <div className="pt-10  grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -65,8 +70,6 @@ function Homepage() {
             </Link>
           </div>
         </div>
-      ) : (
-        <LoadingPage />
       )}
     </>
   );
