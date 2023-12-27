@@ -19,7 +19,7 @@ function Homepage() {
   }, []);
   return (
     <>
-      {loading && ready ? (
+      {loading && !ready ? (
         <LoadingPage />
       ) : (
         <div className=" flex flex-col w-10/12 mx-auto grow justify-between  ">
