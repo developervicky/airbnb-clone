@@ -17,7 +17,7 @@ function Topbar() {
   }
 
   const logout = async () => {
-    await axios.post("/api/logout").then((res) => {
+    await axios.post("/logout").then((res) => {
       // console.log(res);
       Toastify("success", `${res.data}`);
       setRedirect(true);

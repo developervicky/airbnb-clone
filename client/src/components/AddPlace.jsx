@@ -9,7 +9,7 @@ export default function AddPlace() {
   const [placeFind, setplaceFind] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/placeFind").then(({ data }) => {
+    axios.get("/placeFind").then(({ data }) => {
       setplaceFind(data);
     });
   }, []);

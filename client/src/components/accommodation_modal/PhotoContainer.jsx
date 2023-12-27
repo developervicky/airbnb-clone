@@ -13,7 +13,7 @@ export default function PhotoContainer({
 }) {
   const uploadPhotoByLink = async (e) => {
     e.preventDefault();
-    const { data: newname } = await axios.post("/api/uploads_link", { photoLink });
+    const { data: newname } = await axios.post("/uploads_link", { photoLink });
     setAddedPhoto((prev) => {
       return [...prev, newname];
     });
@@ -29,7 +29,7 @@ export default function PhotoContainer({
       // console.log(data);
     }
     axios
-      .post("/api/uploads", data, {
+      .post("/uploads", data, {
         headers: { "Content-type": "multipart/form-data" },
       })
       .then((res) => {

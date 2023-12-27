@@ -53,10 +53,10 @@ export default function AccommodationModal() {
     e.preventDefault();
     try {
       if (id) {
-        await axios.put("/api/accommodation", { id, ...accInfo });
+        await axios.put("/accommodation", { id, ...accInfo });
         navigate("/account/accommodations");
       } else {
-        await axios.post("/api/accommodation", accInfo);
+        await axios.post("/accommodation", accInfo);
         navigate("/account/accommodations");
       }
     } catch (error) {
@@ -69,7 +69,7 @@ export default function AccommodationModal() {
     if (!id) {
       return;
     }
-    axios.get(`/api/user/${id}`).then((res) => {
+    axios.get(`/user/${id}`).then((res) => {
       const { data } = res;
       setTitle(data.title);
       setAddress(data.address);
