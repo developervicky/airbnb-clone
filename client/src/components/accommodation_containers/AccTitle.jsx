@@ -13,19 +13,19 @@ export default function AccTitle({ place }) {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-medium tracking-wide">{place.title}</h2>
+        <h2 className="text-xl md:text-3xl font-bold md:font-medium tracking-wide">{place.title}</h2>
         {!user ||
           (user._id == place.ownerId && subpage == "accommodations" && (
-            <div className="flex gap-6">
+            <div className="flex gap-2 md:gap-6">
               <Link
                 to={"del"}
-                className="border-2 border-primary flex items-center text-primary p-2 rounded-full hover:text-white hover:bg-caution hover:border-caution"
+                className="border-2 border-primary flex items-center text-primary p-1 md:p-2 rounded-full hover:text-white hover:bg-caution hover:border-caution"
               >
-                <MdDeleteOutline className="text-2xl " />
+                <MdDeleteOutline className="text-xl md:text-2xl " />
               </Link>
               <Link
                 to={`/account/accommodations/useredit/${id}`}
-                className="text-3xl border-2 border-black p-2 rounded-full text-primary border-primary hover:text-white hover:bg-primary hover:border-white"
+                className="text-xl md:text-3xl border-2 border-black p-2 rounded-full text-primary border-primary hover:text-white hover:bg-primary hover:border-white"
               >
                 <TbUserEdit className="" />
               </Link>

@@ -53,7 +53,7 @@ export default function PhotoContainer({
   };
 
   return (
-    <div className="flex flex-col gap-4 p-2 pb-6 border-b-2">
+    <div className="flex flex-col gap-4 p-2 pt-6 pb-6 border-b-2">
       <h2 className="text-lg tracking-wider font-semibold">Photos</h2>
       <div className="flex flex-row items-center pr-2 border-2 rounded-xl">
         <input

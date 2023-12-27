@@ -212,10 +212,10 @@ app.post("/uploads", photoMiddleware.array("photos", 100), async (req, res) => {
   for (let i = 0; i < req.files.length; i++) {
     // console.log(req.files[i]);
     const { path, originalname } = req.files[i];
-    const parts = originalname.split(".");
-    const ext = parts[parts.length - 1];
-    const newPath = path + "." + ext;
-    fs.renameSync(path, newPath);
+    // const parts = originalname.split(".");
+    // const ext = parts[parts.length - 1];
+    // const newPath = path + "." + ext;
+    // fs.renameSync(path, newPath); => local server function
     uploadedFiles.push(newPath.replace("uploads\\", ""));
   }
   res.json(uploadedFiles);

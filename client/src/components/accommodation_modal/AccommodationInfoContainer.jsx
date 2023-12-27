@@ -31,12 +31,12 @@ export default function AccommodationInfoContainer({
   };
 
   return (
-    <div className="flex flex-col gap-4 p-2 pb-6 border-b-2">
+    <div className="flex flex-col gap-4 p-2 pt-6 pb-6 border-b-2">
       <h2 className="text-lg tracking-wider font-semibold">
         Accommodation Info
       </h2>
       <h2 className="text-md tracking-wider font-semibold">Amenities</h2>
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <label className="flex flex-row items-center  rounded-lg gap-4 border-2 p-4 cursor-pointer hover:border-primary">
           <input
             type="checkbox"
@@ -105,8 +105,8 @@ export default function AccommodationInfoContainer({
           </h2>
         </label>
       </div>
-      <h2 className="text-md tracking-wider font-semibold">Room Info</h2>
-      <div className="grid grid-cols-3 gap-3">
+      <h2 className="text-md tracking-wider font-semibold pt-3">Room Info</h2>
+      <div className=" grid md:grid-cols-3 gap-3">
         <input
           type="number"
           value={maxGuests}
@@ -136,9 +136,9 @@ export default function AccommodationInfoContainer({
           className="flex flex-row items-center rounded-lg gap-4 border-2 p-4 cursor-pointer focus:outline-none hover:border-primary focus:border-primary"
         />
       </div>
-      <h2 className="text-md tracking-wider font-semibold">Guests Info</h2>
-      <div className="grid grid-cols-3 gap-3">
-        <div className="flex flex-col gap-1">
+      <h2 className="text-md tracking-wider font-semibold pt-3">Guests Info</h2>
+      <div className="grid md:grid-cols-3 gap-6 md:gap-3">
+        <div className="flex flex-col items-start gap-1">
           <h2 className="tracking-wider">Checkin Time</h2>
           <input
             type="time"
@@ -147,7 +147,7 @@ export default function AccommodationInfoContainer({
             className="w-full flex flex-row items-center rounded-lg gap-4 border-2 p-4 cursor-pointer focus:outline-none hover:border-primary focus:border-primary"
           />
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col items-start gap-1">
           <h2 className="tracking-wider">Checkout Time</h2>
           <input
             type="time"
@@ -157,8 +157,8 @@ export default function AccommodationInfoContainer({
           />
         </div>
       </div>
-      <h2 className="text-md tracking-wider font-semibold">Pricings</h2>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="flex flex-col items-start gap-1">
+      <h2 className="text-md tracking-wider font-semibold items-start">Pricings</h2>
         <input
           type="number"
           value={price}

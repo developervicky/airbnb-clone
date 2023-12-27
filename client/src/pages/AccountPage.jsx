@@ -25,7 +25,7 @@ function AccountPage() {
 
   const topbarStyle = (type) => {
     let classes =
-      "text-xl px-7 pb-4 pt-2 font-semibold tracking-wider hover:border-b-2 hover:border-primary hover:text-primary";
+      "text-lg md:text-xl px-3 md:px-7 pb-4 pt-2 font-semibold tracking-wider hover:border-b-2 hover:border-primary hover:text-primary";
     if (type === subpage) {
       classes += " border-b-2 border-primary text-primary";
     }
@@ -33,9 +33,9 @@ function AccountPage() {
   };
 
   return (
-    <div className="flex flex-col py-6 grow justify-between  ">
-      <div className="w-10/12  mx-auto  ">
-        <nav className="flex justify-between mb-12 gap-3">
+    <div className="flex grow flex-col py-6  justify-between  ">
+      <div className="flex flex-col w-11/12 md:w-10/12 grow mx-auto  ">
+        <nav className="flex justify-between items-center mb-12  ">
           <Link className={topbarStyle("profile")} to={"/account/profile"}>
             Profile
           </Link>
@@ -46,7 +46,7 @@ function AccountPage() {
             className={topbarStyle("accommodations")}
             to={"/account/accommodations"}
           >
-            Your Own Accommodations
+            Accommodations
           </Link>
         </nav>
         {subpage === "profile" && <ProfilePage />}

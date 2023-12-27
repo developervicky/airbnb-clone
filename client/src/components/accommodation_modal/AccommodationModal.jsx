@@ -104,13 +104,7 @@ export default function AccommodationModal() {
             <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-4xl">
               <div className=" bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 ">
                 <div className="mt-3 text-center sm:ml-2 sm:mt-0 sm:text-left">
-                  <div className="flex flex-row justify-between">
-                    <h1
-                      className="text-2xl pt-2 font-bold leading-6 tracking-wider text-gray-900"
-                      id="modal-title"
-                    >
-                      Post your Accommodation Info
-                    </h1>
+                  <div className="absolute top-6 right-6 md:right-6">
                     <Link
                       to={
                         !id
@@ -120,11 +114,18 @@ export default function AccommodationModal() {
                     >
                       <AiOutlineCloseCircle
                         type="button"
-                        className="text-3xl hover:text-white hover:bg-primary hover:rounded-full"
+                        className="text-2xl md:text-3xl hover:text-white hover:bg-primary hover:rounded-full"
                       />
                     </Link>
                   </div>
-
+                  <div className="mx-auto pt-6">
+                    <h1
+                      className="text-lg md:text-2xl pt-2 font-bold leading-6 tracking-wider text-gray-900"
+                      id="modal-title"
+                    >
+                      Post your Accommodation Info
+                    </h1>
+                  </div>
                   <BasicInfoContainer
                     title={title}
                     setTitle={setTitle}

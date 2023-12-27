@@ -3,7 +3,7 @@ import { MdOutlinePhotoLibrary } from "react-icons/md";
 export default function AccPhotos({ place, setShowPhotos }) {
   const seeMoreStyle = (styles) => {
     let style =
-      "absolute flex gap-3 items-center  bg-gray-300 bg-opacity-75 p-4 rounded-xl  hover:bg-primary hover:bg-opacity-75 hover:text-white";
+      "absolute flex gap-3 items-center  bg-gray-300 bg-opacity-75 p-2 md:p-4 rounded-xl  hover:bg-primary hover:bg-opacity-75 hover:text-white";
     if (styles >= 3) {
       // console.log(style + " bottom-4 right-4");
       return style + " bottom-4 right-4";

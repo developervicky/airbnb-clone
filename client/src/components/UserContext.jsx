@@ -6,6 +6,10 @@ export const UserContext = createContext({});
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [ready, setReady] = useState(false);
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
 
   useEffect(() => {
     if (!user) {
@@ -14,9 +18,22 @@ export const UserContextProvider = ({ children }) => {
         setReady(true);
       });
     }
+  }, [user]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
   }, []);
+
   return (
-    <UserContext.Provider value={{ user, setUser, ready}}>
+    <UserContext.Provider value={{ user, setUser, ready, windowSize }}>
       {children}
     </UserContext.Provider>
   );

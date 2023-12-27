@@ -52,7 +52,7 @@ export default function AddPlace() {
               </>
             ))}
         </div>
-        <div className="flex flex-col  items-end justify-end sticky bottom-0 pb-8">
+        <div className="flex flex-col grow items-end justify-end sticky bottom-0 pb-4 md:pb-8 md:pr-8">
           <Link
             to={"/account/accommodations/new"}
             className="flex flex-row-reverse flex-row bg-white w-fit items-center justify-center px-4 gap-3 border-2 p-2 rounded-full cursor-pointer font-semibold  hover:border-primary hover:bg-primary hover:text-white"

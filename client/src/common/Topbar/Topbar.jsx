@@ -7,7 +7,7 @@ import axios from "axios";
 function Topbar() {
   const [redirect, setRedirect] = useState(false);
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, windowSize } = useContext(UserContext);
 
   if (redirect) {
     setUser(null);
@@ -25,9 +25,9 @@ function Topbar() {
   };
 
   return (
-    <div className="sticky z-10 top-0 bg-white">
-      <header className="py-6 flex justify-around gap-4 px-4">
-        <a href="/" className="flex items-center gap-2">
+    <div className="sticky z-10 top-0 bg-white ">
+      <header className="py-6 flex justify-between mx-auto gap-4 px-4 w-11/12 md:w-11/12 lg:w-10/12 xl:w-9/12">
+        <a href="/" className="flex items-center gap-2 ">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,7 +61,7 @@ function Topbar() {
             trip<span className="font-bold">R</span>over
           </span>
         </a>
-        <div className="flex flex-row justify-between items-center w-96 gap-2 border-2 border-gray-200 rounded-full py-0 pr-3 pl-2 shadow-md shadow-gray-200">
+        {/* Search Button <div className="flex flex-row justify-between items-center w-96 gap-2 border-2 border-gray-200 rounded-full py-0 pr-3 pl-2 shadow-md shadow-gray-200">
           <input
             type="text"
             placeholder="where the next adventure, fella!"
@@ -83,27 +83,30 @@ function Topbar() {
               />
             </svg>
           </button>
-        </div>
-        <div className="flex flex-row gap-5 ">
+        </div> */}
+        {/* <div>{windowSize[0]}</div> */}
+        <div className="flex flex-row gap-2 ">
           <Link
             to={user ? "/account" : "/signin"}
-            className="flex border-2 border-gray-200 rounded-full py-2 px-4  gap-2 font-medium items-center shadow-md shadow-gray-200  hover:border-primary"
+            className="flex border-2 border-gray-200  rounded-full py-2 px-4  gap-2 font-medium items-center shadow-md shadow-gray-200  hover:border-primary"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="#707170"
-              className="w-9 h-9"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <div className=" ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#707170"
+                className="w-9 h-9"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
             {user ? (
-              <div className="text-lg font-semibold text-gray-500 tracking-wider ">
-                {user.fname}
+              <div className="text-lg font-semibold text-gray-500 tracking-wider">
+                {windowSize[0] > 425 ? user.fname : user.fname.split("")[0]}
               </div>
             ) : (
               <div className="font-semibold text-gray-500 tracking-wider ">
