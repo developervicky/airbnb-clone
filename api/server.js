@@ -110,7 +110,7 @@ app.post("/api/register", async (req, res) => {
       token: crypto.randomBytes(32).toString("hex"),
     }).save();
     const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
-    console.log(userData.email, url);
+    // console.log(userData.email, url);
     await sendEmail(userData.email, "Verify Email - tripRover", url, fullname);
     return res.send({ message: "Verify the Email" });
   } catch (e) {
@@ -160,6 +160,7 @@ app.post("/api/signin", async (req, res) => {
   const { email, password } = req.body;
   try {
     const userData = await User.findOne({ email });
+    const fullname = userData.fname + " " + userData.lname;
     if (userData) {
       // res.json("Email already exist");
       const passOk = bcrypt.compareSync(password, userData.password);
@@ -188,7 +189,12 @@ app.post("/api/signin", async (req, res) => {
               token: crypto.randomBytes(32).toString("hex"),
             }).save();
             const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
-            await sendEmail(userData.email, "Verify Email", url);
+            await sendEmail(
+              userData.email,
+              "Verify Email - tripRover",
+              url,
+              fullname
+            );
             res.status(202).send({ message: "Email sent again" });
           }
         }
