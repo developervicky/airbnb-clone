@@ -102,7 +102,7 @@ app.post("/api/register", async (req, res) => {
       {},
       (err, token) => {
         if (err) throw err;
-        res.json(userData);
+        // res.json(userData);
       }
     );
     const verifToken = await new Token({
@@ -112,7 +112,7 @@ app.post("/api/register", async (req, res) => {
     const url = `${process.env.BASE_URL}users/${userData._id}/verify/${verifToken.token}`;
     // console.log(userData.email, url);
     await sendEmail(userData.email, "Verify Email - tripRover", url, fullname);
-    res.send({ message: "Verify the Email" });
+    res.json({ message: "Verify the Email" });
   } catch (e) {
     res.status(422);
   }
