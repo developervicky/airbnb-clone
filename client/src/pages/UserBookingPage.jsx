@@ -23,7 +23,7 @@ export default function UserBookingPage() {
   console.log(id);
 
   useEffect(() => {
-    axios.get(`/bookings/${id}`).then(({ data }) => {
+    axios.get(`/api/bookings/${id}`).then(({ data }) => {
       setBookingData(data);
     });
   }, [id]);

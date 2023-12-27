@@ -17,7 +17,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       await axios
-        .post("/signin", {
+        .post("/api/signin", {
           email,
           password,
         })

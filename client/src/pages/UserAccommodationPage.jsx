@@ -20,7 +20,7 @@ function UserAccommodationPage() {
 
   useEffect(() => {
     try {
-      axios.get(`/user/${id}`).then(({ data }) => {
+      axios.get(`/api/user/${id}`).then(({ data }) => {
         setplace(data);
       });
     } catch (error) {

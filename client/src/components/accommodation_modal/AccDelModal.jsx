@@ -10,7 +10,7 @@ export default function AccDelModal() {
 
   const delAcc = async () => {
     try {
-      await axios.delete(`/acc/${id}`).then(({ data }) => {
+      await axios.delete(`/api/acc/${id}`).then(({ data }) => {
         console.log(data);
       });
       setRedirect(true);

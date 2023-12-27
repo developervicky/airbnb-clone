@@ -53,10 +53,10 @@ export default function AccommodationModal() {
     e.preventDefault();
     try {
       if (id) {
-        await axios.put("/accommodation", { id, ...accInfo });
+        await axios.put("/api/accommodation", { id, ...accInfo });
         navigate("/account/accommodations");
       } else {
-        await axios.post("/accommodation", accInfo);
+        await axios.post("/api/accommodation", accInfo);
         navigate("/account/accommodations");
       }
     } catch (error) {
