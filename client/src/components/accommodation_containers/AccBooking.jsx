@@ -30,7 +30,7 @@ export default function AccBooking({ place }) {
 
   const bookAcc = async () => {
     try {
-      const response = await axios.post("/bookings", {
+      const response = await axios.post("/api/bookings", {
         checkinDate,
         checkoutDate,
         noGuests,
