@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { format, differenceInCalendarDays } from "date-fns";
 import AccTitle from "../components/accommodation_containers/AccTitle";
 import AccPhotos from "../components/accommodation_containers/AccPhotos";
@@ -17,6 +17,7 @@ import LoadingPage from "./LoadingPage";
 export default function UserBookingPage() {
   const [bookingData, setBookingData] = useState([]);
   const [showPhotos, setShowPhotos] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const { windowSize } = useContext(UserContext);
 
@@ -38,6 +39,21 @@ export default function UserBookingPage() {
     );
   }
 
+  const delBooking = async () => {
+    try {
+      await axios.delete(`/api/bookings/user/${id}`).then(({ data }) => {
+        console.log(data);
+        setRedirect(true);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (redirect) {
+    return <Navigate to={"/account/bookings/"} />;
+  }
+
   if (showPhotos) {
     return (
       <>
@@ -50,7 +66,7 @@ export default function UserBookingPage() {
               <IoCloseCircle className="text-4xl text-primary " />
             </button>
             {bookingData.place?.photos?.length > 0 &&
-              bookingData.place.photos.map((photo) => (
+              bookingData.place?.photos?.map((photo) => (
                 <div>
                   <Image src={photo} alt="" />
                 </div>
@@ -155,6 +171,14 @@ export default function UserBookingPage() {
             <div className="flex text-base md:text-xl gap-2 flex-row tracking-wide justify-start px-4 items-center text-gray-500  pb-2">
               <p className="flex gap-3 ">Payment Method: Cash</p>
             </div>
+          </div>
+          <div className="flex flex-row-reverse p-3">
+            <button
+              onClick={() => delBooking()}
+              className="border-2 px-4 py-2 rounded-xl bg-caution text-white tracking-wide border-caution hover:bg-cautionl"
+            >
+              Delete
+            </button>
           </div>
         </div>
       ) : (

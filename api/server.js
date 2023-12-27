@@ -470,4 +470,10 @@ app.delete("/api/acc/:id", async (req, res) => {
   res.json(await Place.findByIdAndDelete(id));
 });
 
+app.delete("/api/bookings/user/:id", async (req, res) => {
+  mongoose.connect(process.env.MONGO_URL);
+  const { id } = req.params;
+  res.json(await Booking.findByIdAndDelete(id));
+});
+
 app.listen(5000);
