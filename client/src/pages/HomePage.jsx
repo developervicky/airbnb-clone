@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GoPlus } from "react-icons/go";
+import Image from "../common/Image";
 function Homepage() {
   const [accData, setAccData] = useState([]);
   useEffect(() => {
@@ -22,8 +23,8 @@ function Homepage() {
                     to={`/account/accommodations/user/${acc._id}`}
                     className="flex flex-col gap-3"
                   >
-                    <img
-                      src={"http://localhost:5000/uploads/" + acc.photos[0]}
+                    <Image
+                      src={acc.photos[0]}
                       alt="plcImg"
                       className="aspect-square object-cover rounded-2xl"
                     />

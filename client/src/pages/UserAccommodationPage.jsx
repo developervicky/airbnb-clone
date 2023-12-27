@@ -11,6 +11,7 @@ import AccInfo from "../components/accommodation_containers/AccInfo";
 
 import AccExtraInfo from "../components/accommodation_containers/AccExtraInfo";
 import AccBooking from "../components/accommodation_containers/AccBooking";
+import Image from "../common/Image";
 
 function UserAccommodationPage() {
   const [place, setplace] = useState([]);
@@ -41,7 +42,7 @@ function UserAccommodationPage() {
             {place?.photos?.length > 0 &&
               place.photos.map((photo) => (
                 <div>
-                  <img src={"http://localhost:5000/uploads/" + photo} alt="" />
+                  <Image src={photo} alt="" />
                 </div>
               ))}
           </div>

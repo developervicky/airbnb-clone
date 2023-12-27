@@ -11,6 +11,7 @@ import { IoPeopleSharp, IoCloseCircle } from "react-icons/io5";
 import { MdEmail, MdOutlinePhone } from "react-icons/md";
 import AccAmenities from "../components/accommodation_containers/AccAmenities";
 import { UserContext } from "../components/UserContext";
+import Image from "../common/Image";
 
 export default function UserBookingPage() {
   const [bookingData, setBookingData] = useState([]);
@@ -50,7 +51,7 @@ export default function UserBookingPage() {
             {bookingData.place?.photos?.length > 0 &&
               bookingData.place.photos.map((photo) => (
                 <div>
-                  <img src={"http://localhost:5000/uploads/" + photo} alt="" />
+                  <Image src={photo} alt="" />
                 </div>
               ))}
           </div>

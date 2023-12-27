@@ -3,6 +3,7 @@ import { FiPlusCircle } from "react-icons/fi";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+import Image from "../../common/Image";
 
 export default function PhotoContainer({
   photoLink,
@@ -86,8 +87,8 @@ export default function PhotoContainer({
         {addedPhoto.length > 0 &&
           addedPhoto.map((link) => (
             <div key={link} className="relative">
-              <img
-                src={"http://localhost:5000/uploads/" + link}
+              <Image
+                src={link}
                 alt={link}
                 className=" border-2 h-32 w-full rounded-xl object-cover hover:border-primary "
               />

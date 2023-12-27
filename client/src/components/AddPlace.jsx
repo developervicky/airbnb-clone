@@ -3,6 +3,7 @@ import { GoPlus } from "react-icons/go";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AccountPage from "../pages/AccountPage";
+import Image from "../common/Image";
 
 export default function AddPlace() {
   const [placeFind, setplaceFind] = useState([]);
@@ -29,8 +30,8 @@ export default function AddPlace() {
                     to={`admin/${acc._id}`}
                     className="flex flex-col gap-3"
                   >
-                    <img
-                      src={"http://localhost:5000/uploads/" + acc.photos[0]}
+                    <Image
+                      src={acc.photos[0]}
                       alt="plcImg"
                       className="aspect-square object-cover rounded-2xl"
                     />

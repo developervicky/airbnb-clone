@@ -1,4 +1,5 @@
 import { MdOutlinePhotoLibrary } from "react-icons/md";
+import Image from "../../common/Image";
 
 export default function AccPhotos({ place, setShowPhotos }) {
   const seeMoreStyle = (styles) => {
@@ -22,20 +23,20 @@ export default function AccPhotos({ place, setShowPhotos }) {
             className=" cursor-pointer grid grid-cols-[2fr_1fr] gap-2 overflow-hidden rounded-3xl "
           >
             <div>
-              <img
-                src={"http://localhost:5000/uploads/" + place.photos[0]}
+              <Image
+                src={place.photos[0]}
                 alt="plcImg"
                 className="aspect-square object-cover"
               />
             </div>
             <div className="grid ">
-              <img
-                src={"http://localhost:5000/uploads/" + place.photos[1]}
+              <Image
+                src={place.photos[1]}
                 alt="plcImg"
                 className="aspect-square object-cover"
               />
-              <img
-                src={"http://localhost:5000/uploads/" + place.photos[2]}
+              <Image
+                src={place.photos[2]}
                 alt="plcImg"
                 className="aspect-square object-cover relative top-2"
               />
@@ -44,8 +45,8 @@ export default function AccPhotos({ place, setShowPhotos }) {
         ) : (
           <div className=" rounded-3xl  border-2 w-fit mx-auto  overflow-hidden ">
             <div>
-              <img
-                src={"http://localhost:5000/uploads/" + place.photos[0]}
+              <Image
+                src={place.photos[0]}
                 alt="plcImg"
                 className="object-cover"
               />
