@@ -54,7 +54,7 @@ export default function AccBooking({ place }) {
 
   return (
     <>
-      <div className=" flex  w-min items-start justify-center lg:sticky lg:top-24 py-5 md:pt-10 md:pb-2 md:px-4 lg:px-2 xl:p-10">
+      <div className=" flex  w-min items-start justify-center lg:sticky lg:top-24 py-2 pt-6 md:pt-10 md:pb-2 md:px-4 lg:px-2 xl:p-10">
         <div className="flex flex-col justify-start border-2 p-3 sm:px-3 sm:py-4 md:px-10 md:py-4 lg:px-5 lg:py-8 gap-4 sm:gap-6 rounded-2xl shadow-xl">
           <h1 className="text-2xl text-primary font-bold tracking-wider ">
             &#8377;{place.price}/night

@@ -1,7 +1,7 @@
 export default function AccDesc({ place }) {
   return (
     <>
-      <div className="flex flex-col gap-3 py-7 border-b-2 ">
+      <div className="flex flex-col gap-3 py-7 pt-1 border-b-2 ">
         <h1 className="font-bold tracking-wide text-lg md:text-xl  xl:text-2xl">
           Explore in {place.city}, {place.country}
         </h1>
