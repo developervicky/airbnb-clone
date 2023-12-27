@@ -36,7 +36,7 @@ function BookingPage() {
         <LoadingPage />
       ) : (
         <div className="flex grid sm:grid-cols-1 md:grid-cols-2 gap-8 truncate grow">
-          <div className="" >
+          <div className="">
             <h1 className="text-lg sm:text-xl font-bold tracking-wider">
               My Bookings
             </h1>
@@ -49,7 +49,7 @@ function BookingPage() {
                     className="flex flex-col  gap-2 border-2 border-primary p-2  sm:p-3  rounded-xl text-gray-600 cursor-pointer shadow-lg shadow-gray-300 hover:bg-primary hover:text-white"
                   >
                     <h1 className=" text-sm sm:text-base font-semibold tracking-wide truncate">
-                      {booking.place.title}
+                      {booking.place?.title}
                     </h1>
                     <p className="tracking-wide text-sm sm:text-base ">
                       <span className="font-semibold ">Name: </span>
