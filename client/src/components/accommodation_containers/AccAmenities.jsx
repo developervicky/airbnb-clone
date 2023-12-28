@@ -5,7 +5,7 @@ import { MdOutlinePets, MdPool } from "react-icons/md";
 
 export default function AccAmenities({ place }) {
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-3 md:items-center text-gray-600 gap-8 pt-5 pb-3 tracking-wide md:text-xl  xl:text-2xl">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 md:items-center text-gray-600 gap-8 pt-5 pb-3 tracking-wide md:text-xl  xl:text-2xl">
       {place?.amenities.map((each) => {
         if (each == "wifi") {
           return (

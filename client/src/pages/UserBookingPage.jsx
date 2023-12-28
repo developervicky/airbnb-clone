@@ -84,7 +84,7 @@ export default function UserBookingPage() {
           <AccTitle place={bookingData.place} />
           <AccPhotos place={bookingData.place} setShowPhotos={setShowPhotos} />
           <div className="flex flex-col gap-2 border-2 mt-4 p-4 rounded-2xl shadow-lg ">
-            <h1 className="text-xl md:text-2xl font-medium tracking-wide border-b-2 border-primary pb-2">
+            <h1 className="text-xl md:text-2xl truncate font-medium tracking-wide border-b-2 border-primary pb-2">
               Booking Information
             </h1>
             <div className="flex flex-col gap-5 md:gap-2 md:flex-row justify-around tracking-wide text-xl g text-gray-500  py-4">
@@ -108,7 +108,7 @@ export default function UserBookingPage() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col  gap-2 border-2 mt-4 p-4 rounded-2xl shadow-lg ">
+          <div className="flex flex-col truncate gap-2 border-2 mt-4 p-4 rounded-2xl shadow-lg ">
             <h1 className="text-xl md:text-2xl font-medium tracking-wide border-b-2 border-primary pb-2">
               Guest Information
             </h1>
@@ -122,9 +122,9 @@ export default function UserBookingPage() {
                 {bookingData.noGuests > 1 ? "Guests" : "Guest"}
               </p>
             </div>
-            <div className="flex md:text-xl  gap-2 flex-col  md:flex-row md:justify-around tracking-wide text-gray-500 ">
-              <div className="flex gap-3 items-center ">
-                <MdEmail className="text-primary" />
+            <div className="flex md:text-xl gap-2 flex-col truncate  md:flex-row md:justify-around tracking-wide text-gray-500 ">
+              <div className="flex gap-3  whitespace-pre items-center  ">
+                <MdEmail className=" text-primary" />
                 {bookingData.email}
               </div>
               <p className="flex gap-3 items-center ">
@@ -132,7 +132,7 @@ export default function UserBookingPage() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-2 border-2 mt-4 p-4 rounded-2xl shadow-lg ">
+          <div className="flex flex-col gap-2 border-2 truncate mt-4 p-4 rounded-2xl shadow-lg ">
             <h1 className="text-xl md:text-2xl font-medium tracking-wide border-b-2 border-primary pb-2">
               Accommodation Information
             </h1>
@@ -140,12 +140,12 @@ export default function UserBookingPage() {
               <AccAmenities place={bookingData?.place} />
             </div>
           </div>
-          <div className="flex flex-col gap-2 border-2 mt-4 p-4  rounded-2xl shadow-lg ">
+          <div className="flex flex-col gap-2 border-2 mt-4 p-4 truncate  rounded-2xl shadow-lg ">
             <h1 className="text-xl md:text-2xl font-medium tracking-wide border-b-2 border-primary pb-2">
               Payment Information
             </h1>
-            <div className="flex  text-base md:text-xl  gap-2 flex-row tracking-wide justify-between px-4 md:items-center text-gray-500 border-b-2  py-4">
-              <div className="flex md:gap-3  ">
+            <div className="flex flex-col   md:text-xl  gap-2 sm:flex-row tracking-wide justify-between px-4 md:items-center text-gray-500 border-b-2  py-4">
+              <div className="flex flex-col sm:flex-row md:gap-3  ">
                 <span>
                   {bookingData.noRooms}
                   {bookingData.noRooms > 1 ? "Rooms" : "Room"}
@@ -158,8 +158,10 @@ export default function UserBookingPage() {
                 <span>&#10006;</span>
                 <span>&#8377;{bookingData.place?.price}/room</span>
               </div>
-              <p>
-                <span>&#8377;{bookingData.price}</span>
+              <p className="flex ">
+                <span className="flex grow justify-end">
+                  &#8377;{bookingData.price}
+                </span>
               </p>
             </div>
             <div className="flex text-base md:text-xl  gap-2 flex-row tracking-wide justify-between px-4 items-center text-gray-500  py-2">

@@ -40,27 +40,27 @@ function LoginPage() {
 
   return (
     <div className="flex flex-col justify-center grow   items-center gap-5 ">
-      <div className=" text-3xl font-bold">
+      <div className="text-xl sm:text-3xl font-bold">
         Welcome to
-        <span className="text-4xl font-medium text-primary tracking-wider">
+        <span className="text-2xl sm:text-4xl font-medium text-primary tracking-wider">
           {" "}
           trip<span className="font-bold">R</span>over
         </span>
       </div>
-      <div className="text-3xl font-bold underline underline-offset-4 decoration-primary ">
+      <div className="text-lg sm:text-3xl font-bold underline underline-offset-4 decoration-primary ">
         Login
       </div>
-      <form className="flex flex-col gap-4" onSubmit={signinUser}>
+      <form className="flex w-9/12 sm:w-7/12 md:w-5/12 xl:w-3/12 flex-col gap-4 " onSubmit={signinUser}>
         <div className="">
           <input
             type="email"
             placeholder="Email"
             value={email}
-            className="border-2 w-full font-medium tracking-wider font-medium rounded-full px-4 py-3 focus:outline-none "
+            className="border-2  w-full font-medium tracking-wider font-medium rounded-full px-4 py-3 focus:outline-none "
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="input-container">
+        <div className="input-container ">
           <div className="flex flex-row items-center border-2 rounded-full ps-0 pe-2 py-0 bg-white">
             <input
               value={password}
@@ -107,7 +107,7 @@ function LoginPage() {
           </button>
         </div>
       </form>
-      <div>
+      <div className="text-sm sm:text-base">
         Don't have a account?{" "}
         <Link
           to="/signup"

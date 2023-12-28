@@ -84,17 +84,20 @@ function SignupPage() {
 
   return (
     <div className="flex flex-col justify-center grow   items-center gap-5 ">
-      <div className=" text-3xl font-bold">
+      <div className=" text-xl sm:text-3xl font-bold">
         Welcome to
-        <span className="text-3xl font-medium text-primary tracking-wider">
+        <span className="text-2xl sm:text-4xl  font-medium text-primary tracking-wider">
           {" "}
           trip<span className="font-bold">R</span>over
         </span>
       </div>
-      <div className="text-3xl font-bold underline underline-offset-4 decoration-primary ">
+      <div className="text-lg sm:text-3xl font-bold underline underline-offset-4 decoration-primary ">
         Signup
       </div>
-      <form className="flex flex-col gap-4" onSubmit={registerUser}>
+      <form
+        className="flex flex-col w-9/12 sm:w-7/12 md:w-5/12 xl:w-3/12 gap-4"
+        onSubmit={registerUser}
+      >
         <input
           type="text"
           placeholder="First Name"
@@ -170,7 +173,10 @@ function SignupPage() {
           </div>
 
           {password.length !== 0 ? (
-            <p className="px-4 pt-2" style={{ color: getActiveColor(message) }}>
+            <p
+              className="text-xs sm:text-base px-4 pt-2"
+              style={{ color: getActiveColor(message) }}
+            >
               Your password is {message}
             </p>
           ) : null}
@@ -192,7 +198,7 @@ function SignupPage() {
           </div>
         )}
       </form>
-      <div>
+      <div className="text-sm sm:text-base">
         Already having a account!{" "}
         <Link
           to="/signin"
