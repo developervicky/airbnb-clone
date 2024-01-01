@@ -1,18 +1,16 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { format, differenceInCalendarDays } from "date-fns";
 import AccTitle from "../components/accommodation_containers/AccTitle";
 import AccPhotos from "../components/accommodation_containers/AccPhotos";
 import { FaLongArrowAltRight, FaRegCalendarAlt } from "react-icons/fa";
-import { MdNightsStay } from "react-icons/md";
-import { MdAccessTime } from "react-icons/md";
-import { IoPeopleSharp, IoCloseCircle } from "react-icons/io5";
-import { MdEmail, MdOutlinePhone } from "react-icons/md";
+import { IoPeopleSharp,} from "react-icons/io5";
+import { MdEmail, MdOutlinePhone, MdNightsStay } from "react-icons/md";
 import AccAmenities from "../components/accommodation_containers/AccAmenities";
 import { UserContext } from "../components/UserContext";
-import Image from "../common/Image";
 import LoadingPage from "./LoadingPage";
+import ImageCarousel from "../common/ImageCarousel";
 
 export default function UserBookingPage() {
   const [bookingData, setBookingData] = useState([]);
@@ -55,26 +53,7 @@ export default function UserBookingPage() {
   }
 
   if (showPhotos) {
-    return (
-      <>
-        <div className="absolute z-50 inset-0  min-w-full min-h-screen ">
-          <div className="bg-gray-200 flex flex-col items-center gap-10 px-20 py-24 ">
-            <button
-              onClick={() => setShowPhotos(false)}
-              className="sticky top-10"
-            >
-              <IoCloseCircle className="text-4xl text-primary " />
-            </button>
-            {bookingData.place?.photos?.length > 0 &&
-              bookingData.place?.photos?.map((photo) => (
-                <div>
-                  <Image src={photo} alt="" />
-                </div>
-              ))}
-          </div>
-        </div>
-      </>
-    );
+    return <ImageCarousel setShowPhotos={setShowPhotos} place={bookingData.place} />;
   }
 
   return (
